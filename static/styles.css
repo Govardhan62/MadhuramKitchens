@@ -1,0 +1,110 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+header {
+    position: absolute;
+    width: 99%;
+}
+/* .background-image {
+     background-image: url(../../background/Madhuram_WEB-PAGE_WITH-TEXT.jpg);
+    background-image: url('static/images/Madhuram-WEB-PAGE_WITHOUT-TEXT-02.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* width: 100vw; */
+    /* height: 100vh; */
+/* }  */ 
+
+.hero-content {
+    /* font-family: "Oxygen", sans-serif; */
+    position: relative;
+    margin-top: 14%;
+    margin-left: 5%;
+}
+input[type="search"] {
+    width: 90%;
+    line-height: 3;
+    border-radius: 25px;
+    border-color: #f57d20;
+    padding: 2px 15px;
+    margin-left: -5px;
+    margin-top: -5px;
+}
+.popular-section {
+    position: relative;
+    margin-top: 3%;
+    margin-left: -2%;
+}
+
+.popular-section div img {
+    border-radius: 5px;
+}
+
+.popular-section div h6 {
+    background-color: #ffffff;
+    color: #3b3b3b;
+    padding: 5px 10px 5px;
+    font-weight: 500;
+    position: absolute;
+    bottom: 0;
+    margin-left: 0.5%;
+    width: 15%;
+    box-shadow: 1px 1px 10px 0 #3b3b3b;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #3b3b3b;
+    border-color: #3b3b3b;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #000;
+    border-color: #000;
+}
+.btn-check:active+.btn-primary, .btn-check:checked+.btn-primary, .btn-primary.active, .btn-primary:active, .show>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #000;
+    border-color: #000;
+}
+btn-check:active+.btn-primary:focus, .btn-check:checked+.btn-primary:focus, .btn-primary.active:focus, .btn-primary:active:focus, .show>.btn-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 .25rem rgb(255 87 34 / 20%);
+}
+.btn-outline-primary {
+    color: #3b3b3b;
+    border-color: #3b3b3b;
+}
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #3b3b3b;
+    border-color: #3b3b3b;
+}
+.btn-check:active+.btn-outline-primary:focus, .btn-check:checked+.btn-outline-primary:focus, .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus, .btn-outline-primary:active:focus {
+    box-shadow: 0 0 0 .25rem rgb(59 59 59 / 13%);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 1200px) {
+    .h1, h1 {
+        font-size: 3rem;
+    }
+}

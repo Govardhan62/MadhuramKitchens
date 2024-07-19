@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        nav {
+            background-color: #343a40;
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav div {
+            font-size: 1.2em;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: #007bff;
+        }
+
+        nav a:hover {
+            background-color: #0056b3;
+        }
+
+        .container {
+            margin: 20px auto;
+            max-width: 1200px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .summary, .section {
+            margin-bottom: 30px;
+        }
+
+        .summary h2, .section h2 {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .summary p, .section ul {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section ul li {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+        }
+
+        .section ul li a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .section ul li a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div>Welcome, {{ request.user.username }}!</div>
+        <a href="supervisorlogout">Logout</a>
+    </nav>
+
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+
+        <div class="summary">
+            <h2>Summary</h2>
+            <p>Total Categories: {{ category_count }}</p>
+            <p>Total Menu Items: {{ menu_item_count }}</p>
+        </div>
+
+        <div class="section">
+            <h2>Recent Orders</h2>
+            <ul>
+                {% for order in recent_orders %}
+                    <li>{{ order }} - {{ order.created_at }}</li>
+                {% empty %}
+                    <li>No orders found.</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Manage</h2>
+            <ul>
+                <li><a href="add_category">Add Category</a></li>
+                <li><a href="add_menu_item">Add Menu Item</a></li>
+                <li><a href="edit_items">Edit Menu Items</a></li>
+                <li><a href="create_blog">Add Blog</a></li>
+                <li><a href="blog_list">Blog List</a></li>
+                <li><a href="orders_table">Orders</a></li>
+                <li><a href="users_table">Users</a></li>
+            </ul>
+        </div>
+
+    </div>
+</body>
+
+</html>
