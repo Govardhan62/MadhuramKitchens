@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-r(vctop4h_)2ciq#!38tr(bsr^qoyr%t$7*buweve1ikl=&1%0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".awsapprunner.com"]
 
 
 # Application definition
@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -79,12 +80,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'backend',
-        'USER' :'postgres',
-        'PASSWORD':'12345',
-        'HOST':'localhost'
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "mydatabase",
     }
 }
 
@@ -127,7 +125,19 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS =[
     os.path.join(BASE_DIR,'static')
 ]
-STATIC_ROOT =os.path.join(BASE_DIR,'assets')
+#STATIC_ROOT =os.path.join(BASE_DIR,'assets')
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 APPEND_SLASH=False
 
