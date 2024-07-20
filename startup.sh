@@ -15,7 +15,7 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Starting Gunicorn server..."
-gunicorn --workers 2 config.wsgi:application --bind 0.0.0.0:8000
+gunicorn --workers 2 config.wsgi:application --bind 0.0.0.0:80
 if [ $? -ne 0 ]; then
     echo "Gunicorn failed to start"
     exit 1
