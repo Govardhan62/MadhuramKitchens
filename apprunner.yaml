@@ -8,4 +8,9 @@ run:
   runtime-version: 3.8.16
   command: sh ./startup.sh
   network: 
-    port: 80
+    ports:
+  - port: 8191
+    name: db.sqlite3
+    appProtocol: http
+  - port: 80
+    name: http-web
