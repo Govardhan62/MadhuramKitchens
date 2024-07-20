@@ -8,4 +8,4 @@ run:
   runtime-version: 3.8.16
   command: sh startup.sh
   network: null
-    port: 8000: null
+    port: 8000
