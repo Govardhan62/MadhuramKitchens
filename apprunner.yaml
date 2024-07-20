@@ -9,9 +9,5 @@ run:
   command: sh ./startup.sh
 
 network:
-    ports:
-     - port: 8191
-       name: db.sqlite3
-       appProtocol: https
-     - port: 80
-       name: http
+  port: 80
+  name: http
