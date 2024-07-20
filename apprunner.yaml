@@ -8,7 +8,7 @@ build:
       - pip install pipenv
       - pipenv install
     post-build:
-      - python manage.py test
+      - python manage.py runserver
   env:
     - name: DJANGO_SETTINGS_MODULE
       value: "config.settings"  # Updated to match your settings module
@@ -16,4 +16,33 @@ build:
       value: "example"
 run:
   runtime-version: 3.9
-  command: pipenv run gunicorn conf
+  command: pipenv run gunicorn config.wsgi:application --log-file -
+  network: 
+    port: 8000
+    env: MY_APP_PORT  
+  env:
+    - name: DJANGO_SECRET_KEY
+      value: "django-insecure-r(vctop4h_)2ciq#!38tr(bsr^qoyr%t$7*buweve1ikl=&1%0"
+    - name: DEBUG
+      value: "False"
+    - name: ALLOWED_HOSTS
+      value: "*"
+    - name: DATABASE_URL
+      value: "sqlite:///mydatabase"
+    - name: EMAIL_HOST
+      value: "smtp.gmail.com"
+    - name: EMAIL_PORT
+      value: "587"
+    - name: EMAIL_USE_TLS
+      value: "True"
+    - name: EMAIL_HOST_USER
+      value: "madhuramkitchens.com@gmail.com"
+    - name: EMAIL_HOST_PASSWORD
+      value: "smvh wwyx ewry mvtj"
+  secrets:
+    - name: my-secret
+      value-from: "arn:aws:secretsmanager:us-east-1:123456789012:secret:testingstackAppRunnerConstr-kJFXde2ULKbT-S7t8xR:username::"
+    - name: my-parameter
+      value-from: "arn:aws:ssm:us-east-1:123456789012:parameter/parameter-name"
+    - name: my-parameter-only-name
+      value-from: "parameter-name"
