@@ -1,11 +1,19 @@
-  version: 1.0
-  runtime: python3.11
-
-  build:
-    commands:
-      - pip install --upgrade pip
-      - pip install -r requirements.txt
-      - chmod +x startup.sh  # Make the startup script executable
-
-  run:
-    command: ./startup.sh
+version: 1.0
+runtime: python3 
+build:
+  commands:
+    pre-build:
+      - wget -c https://s3.amazonaws.com/DOC-EXAMPLE-BUCKET/test-lib.tar.gz -O - | tar -xz
+    build:        
+      - pip install pipenv
+      - pipenv install
+    post-build:
+      - python manage.py test
+  env:
+    - name: DJANGO_SETTINGS_MODULE
+      value: "config.settings"  # Updated to match your settings module
+    - name: MY_VAR_EXAMPLE
+      value: "example"
+run:
+  runtime-version: 3.7.7
+  command: pipenv run gunicorn conf
