@@ -6,6 +6,6 @@ build:
       - pip install -r requirements.txt
 run:
   runtime-version: 3.8.16
-  command: chmod +x startup.sh
+  command: ./startup.sh
   network: 
     port: 8000
