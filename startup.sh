@@ -11,4 +11,4 @@ python manage.py migrate --noinput
 python manage.py collectstatic --noinput
 
 # Start the application using gunicorn
-gunicorn --workers 4 config.wsgi:application --bind 0.0.0.0:80
+gunicorn --workers 4 config.wsgi:application --bind 0.0.0.0:443
