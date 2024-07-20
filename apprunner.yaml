@@ -1,4 +1,4 @@
-version: 1
+version: 1.0
 runtime: python3
 build:
   commands:
@@ -7,5 +7,5 @@ build:
 run:
   runtime-version: 3.8.16
   command: sh startup.sh
-  network: null
-    port: 8000
+  network: 
+    port: 8000
