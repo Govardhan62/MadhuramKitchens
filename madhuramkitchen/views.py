@@ -369,7 +369,7 @@ def edit_menuitem(request, item_id):
             return redirect('edit_items')
     else:
         form = MenuItemForm(instance=menu_item)
-    return render(request, 'edit_menu_item.html', {'form': form, 'menu_item': menu_item})
+    return render(request, 'add_menu_item.html', {'form': form, 'menu_item': menu_item})
 
 def delete_menuitem(request, item_id):
     menu_item = get_object_or_404(MenuItem, id=item_id)

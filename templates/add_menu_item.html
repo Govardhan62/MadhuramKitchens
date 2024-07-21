@@ -92,7 +92,7 @@
                 {% endfor %}
             {% endif %}
         </div>
-        <form method="post" action="{% url 'add_menu_item' %}" enctype="multipart/form-data">
+        <form method="post" action="{% if menu_item %}{% url 'edit_menuitem' menu_item.id %}{% else %}{% url 'add_menu_item' %}{% endif %}" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
                 {{ form.dish_name.label_tag }}
