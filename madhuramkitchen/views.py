@@ -9,6 +9,12 @@ from django.contrib.auth.models import User ,auth
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+from django.http import HttpResponse
+
+
+def health_check(request):
+    return HttpResponse("OK", status=200)
+
 
 
 def create_blog(request):
