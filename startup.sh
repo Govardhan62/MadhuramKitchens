@@ -11,4 +11,4 @@ python manage.py migrate --noinput
 python manage.py collectstatic --noinput
 
 # Start the application using gunicorn
-exec waitress-serve --port=443 config.wsgi:application
+gunicorn --workers 4 config.wsgi:application --bind 0.0.0.0:443
