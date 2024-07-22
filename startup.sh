@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Exit immediately if a command exits with a non-zero status
+set -e
+
 # Create a virtual environment if it doesn't exist
 if [ ! -d "venv" ]; then
     python -m venv venv
