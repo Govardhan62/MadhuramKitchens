@@ -4,7 +4,6 @@ Django
 django-ckeditor
 django-js-asset==2.2.0
 django-phonenumber-field
-gunicorn==20.1.0
 packaging==24.1
 phonenumberslite==8.13.40
 pillow==10.4.0
@@ -17,3 +16,4 @@ python-decouple==3.7
 boto3==1.26.0
 django-storages==1.13.2
 email-validator
+waitress==3.0.0
