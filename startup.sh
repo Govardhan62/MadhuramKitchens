@@ -16,5 +16,10 @@ echo "Collecting static files..."
 python manage.py collectstatic --noinput
 
 # Start the application using gunicorn
+<<<<<<< HEAD
 echo "Starting the application..."
 exec waitress-serve --port=8000 config.wsgi:application
+=======
+gunicorn --workers 4 config.wsgi:application --bind 0.0.0.0:443
+
+>>>>>>> 2c8169cef62a25e803300f5ec79a956e5f23e110
