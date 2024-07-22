@@ -1,23 +1,9 @@
 #!/bin/sh
-
-# Exit immediately if a command exits with a non-zero status
-set -e
-
-# Create a virtual environment if it doesn't exist
-if [ ! -d "venv" ]; then
-    python -m venv venv
-fi
-
-# Activate the virtual environment
-. venv/bin/activate
-
 # Ensure the Python environment is set up correctly
-pip install --upgrade pip
+python -m pip install --upgrade pip
 pip install -r requirements.txt
-
 # Apply database migrations
 python manage.py migrate --noinput
-
 # Collect static files
 python manage.py collectstatic --noinput
 
