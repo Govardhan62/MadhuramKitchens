@@ -17,4 +17,4 @@ python manage.py collectstatic --noinput
 
 # Start the application using Gunicorn
 echo "Starting the application..."
-exec gunicorn --bind 0.0.0.0:443 config.wsgi:application
+gunicorn --workers 4 config.wsgi:application --bind 0.0.0.0:443
