@@ -18,5 +18,4 @@ python manage.py collectstatic --noinput
 # Start the application using gunicorn
 
 echo "Starting the application..."
-exec waitress-serve --port=${PORT:-8000} config.wsgi:application
-
+gunicorn --workers 2 config.wsgi
