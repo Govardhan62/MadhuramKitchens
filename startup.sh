@@ -1,7 +1,15 @@
 #!/bin/sh
 
+# Create a virtual environment if it doesn't exist
+if [ ! -d "venv" ]; then
+    python -m venv venv
+fi
+
+# Activate the virtual environment
+. venv/bin/activate
+
 # Ensure the Python environment is set up correctly
-python -m pip install --upgrade pip
+pip install --upgrade pip
 pip install -r requirements.txt
 
 # Apply database migrations
