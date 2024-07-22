@@ -15,7 +15,6 @@ python manage.py migrate --noinput
 echo "Collecting static files..."
 python manage.py collectstatic --noinput
 
-# Start the application using gunicorn
-
+# Start the application using Gunicorn
 echo "Starting the application..."
-gunicorn --workers 2 config.wsgi
+exec gunicorn --workers 2 --bind 0.0.0.0:80 config.wsgi:application
