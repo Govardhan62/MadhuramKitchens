@@ -1,11 +1,11 @@
 version: 1.0
-runtime: python3
+runtime: python3.12  # Make sure this matches your Python version
 build:
   commands:
     build:
       - pip install -r requirements.txt
 run:
-  runtime-version: 3.8.16
+  runtime-version: 3.12  # Match this with the runtime version you are using
   command: sh ./startup.sh
   network:
-    port: 443
+    port: 80  # Update to port 80
