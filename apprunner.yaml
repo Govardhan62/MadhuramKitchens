@@ -11,6 +11,6 @@ run:
   pre-run:  
     - python manage.py migrate
     - python manage.py collectstatic
-  command: gunicorn --workers 4 config.wsgi:application
+  command: sh startup.sh
   network:
     port: 8080
