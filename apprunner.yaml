@@ -8,4 +8,4 @@ run:
   runtime-version: 3.8.16
   command: python manage.py collectstatic --noinput
   network:
-    port: 443
+    port: 80
