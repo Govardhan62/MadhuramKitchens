@@ -15,7 +15,7 @@ build:
     - name: MY_VAR_EXAMPLE
       value: "example"
 run:
- runtime-version: 3.11
+  runtime-version: 3.11
   pre-run:  
     - pip3 install pipenv
     - pipenv install
