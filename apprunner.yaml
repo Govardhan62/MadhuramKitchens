@@ -4,8 +4,11 @@ build:
   commands:
     build:
       - pip install -r requirements.txt
+     post-build:
+      - python manage.py migrate --noinput
+      - python manage.py collectstatic
 run:
   runtime-version: 3.8.16
-  command: python manage.py collectstatic --noinput
+  command: gunicorn --workers 4 config.wsgi:application --bind 0.0.0.0:443
   network:
-    port: 80
+    port: 443
