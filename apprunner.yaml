@@ -16,7 +16,7 @@ build:
 run:
   runtime-version: 3.8.16
   pre-run:  
-    - pip3 install pipenv
+    - pip install pipenv
     - pipenv install
     - pip install -r requirements.txt
     - python manage.py migrate
