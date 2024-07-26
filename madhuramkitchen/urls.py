@@ -1,7 +1,7 @@
 from django.urls import path, include
 from .views import index, health_check,add_category, add_menu_item, menu_items, order_successful, log,signup,logout,supervisor, \
 supervisorlogout, orders_table,users_table,back,dashboard,add_phone_number,create_blog,edit_blog,blog_list,delete_blog, \
-blog_items, edit_items,edit_menuitem,delete_menuitem, 
+blog_items, edit_items,edit_menuitem,delete_menuitem
 
 
 urlpatterns = [

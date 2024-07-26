@@ -9,8 +9,9 @@ build:
 run:
   runtime-version: 3.8.16
   pre-run:  
-    - python manage.py migrate
-    - python manage.py collectstatic
+    - pip3 install gunicorn
+    - pip3 install -r requirements.txt
+    - which gunicorn
   command: gunicorn --workers 4 config.wsgi:application --bind 0.0.0.0:8080
   network:
     port: 8080
