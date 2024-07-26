@@ -2,13 +2,26 @@ version: 1.0
 runtime: python3
 build:
   commands:
-    build:
-      - pip install -r requirements.txt
+    build:        
+      - pip install pipenv
+      - pipenv install
+      - 
     post-build:
       - python manage.py migrate
       - python manage.py collectstatic
+  env:
+    - name: DJANGO_SETTINGS_MODULE
+      value: "django_apprunner.settings"
+    - name: MY_VAR_EXAMPLE
+      value: "example"
 run:
-  runtime-version: 3.8.16
-  command: gunicorn --workers 4 config.wsgi:application --bind 0.0.0.0:443
+ runtime-version: 3.11
+  pre-run:  
+    - pip3 install pipenv
+    - pipenv install
+    - pip install -r requirements.txt
+    - python manage.py migrate
+    - python manage.py collectstatic
+  command: pipenv run gunicorn --workers 4 config.wsgi:application --bind 0.0.0.0:443
   network:
     port: 443
