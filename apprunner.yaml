@@ -4,8 +4,8 @@ build:
   commands:
     build:
       - pip install -r requirements.txt
-     post-build:
-      - python manage.py migrate --noinput
+    post-build:
+      - python manage.py migrate
       - python manage.py collectstatic
 run:
   runtime-version: 3.8.16
