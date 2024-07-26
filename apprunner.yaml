@@ -1,5 +1,5 @@
 version: 1.0
-runtime: python
+runtime: python3
 build:
   commands:
     build:        
@@ -13,8 +13,8 @@ build:
 run:
   runtime-version: 3.8.16
   pre-run:  
-    - python manage.py migrate
-    - python manage.py collectstatic
+    - python3 manage.py migrate
+    - python3 manage.py collectstatic
   command: pipenv run gunicorn --workers 4 config.wsgi:application --bind 0.0.0.0:443
   network:
     port: 443
