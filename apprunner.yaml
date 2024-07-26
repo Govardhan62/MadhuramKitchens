@@ -20,8 +20,8 @@ run:
   pre-run: [] # Remove pre-run section
   command: gunicorn config.wsgi --log-file -
   network: 
-    port: 8000
-    env: 8000  
+    port: 8080
+    env: 8080  
   env:
     - name: DEBUG
       value: "on"
