@@ -9,4 +9,4 @@ python manage.py collectstatic --noinput
 
 # Start the application using gunicorn
 
-waitress-serve --port=8080 config.wsgi:application
+
