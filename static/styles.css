@@ -10,15 +10,6 @@ header {
     position: absolute;
     width: 99%;
 }
-/* .background-image {
-     background-image: url(../../background/Madhuram_WEB-PAGE_WITH-TEXT.jpg);
-    background-image: url('static/images/Madhuram-WEB-PAGE_WITHOUT-TEXT-02.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    /* width: 100vw; */
-    /* height: 100vh; */
-/* }  */ 
-
 .hero-content {
     /* font-family: "Oxygen", sans-serif; */
     position: relative;
