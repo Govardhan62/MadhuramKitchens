@@ -8,5 +8,5 @@ python manage.py migrate --noinput
 python manage.py collectstatic --noinput
 
 # Start the application using gunicorn
-
+python manage.py runserver
 
