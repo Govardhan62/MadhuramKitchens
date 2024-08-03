@@ -10,6 +10,7 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 
 def health_check(request):
@@ -118,6 +119,7 @@ def supervisorlogout(request):
     return redirect('/')
 
 
+@csrf_exempt
 def supervisor(request):
     if request.method =='POST':
         username =request.POST['username']
@@ -138,6 +140,7 @@ def supervisor(request):
         return render(request,'admin.html')
 
 
+@csrf_exempt
 def signup(request):
     if request.method == 'POST':
         first_name = request.POST['first_name']
@@ -201,6 +204,7 @@ def signup(request):
 
 
 
+@csrf_exempt
 def log(request):
     if request.method == 'POST':
         phone_number =request.POST['phone_number']
