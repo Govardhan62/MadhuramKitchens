@@ -151,15 +151,15 @@ def signup(request):
         password2 = request.POST['password2']
         
         if password1 == password2:
-            if User.objects.filter(phone_number=phone_number).exists():
-                messages.info(request, 'Phone number is already taken')
-                context={
-                    'first_name':first_name,
-                    'phone_number':phone_number,
-                    'username':username,
-                    'email':email   
-                }
-                return render(request,'signup.html',context)
+            #if User.objects.filter(phone_number=phone_number).exists():
+            #     messages.info(request, 'Phone number is already taken')
+            #     context={
+            #         'first_name':first_name,
+            #         'phone_number':phone_number,
+            #         'username':username,
+            #         'email':email   
+            #     }
+            #     return render(request,'signup.html',context)
             if User.objects.filter(email=email).exists():
                 messages.info(request, 'Email is already taken')
                 context={
