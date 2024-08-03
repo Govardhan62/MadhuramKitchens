@@ -1,5 +1,5 @@
 asgiref==3.8.1
-dj-database-url==0.5.0
+dj-database-url
 Django
 django-ckeditor
 django-js-asset==2.2.0
