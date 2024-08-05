@@ -29,3 +29,13 @@ run:
       value: 'django-insecure-r(vctop4h_)2ciq#!38tr(bsr^qoyr%t$7*buweve1ikl=&1%0'
     - name: ALLOWED_HOSTS
       value: "*"
+    - name: DATABASE_NAME
+      value:"madhuramkitchen" 
+    - name: DATABASE_USER
+      value: "postgres"
+    - name: DATABASE_PASSWORD
+      value: "12345"
+    - name: DATABASE_HOST
+      value: "localhost"
+    - name: DATABASE_PORT
+      value: "5432"
