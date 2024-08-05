@@ -92,3 +92,17 @@ main {
 
 .fw-semibold { font-weight: 600; }
 .lh-tight { line-height: 1.25; }
+
+@media only screen and (max-width: 768px){
+  .fs-4 {
+    font-size: calc(1.275rem + .3vw) !important;
+    margin: 0 3%;
+  }
+}
+@media only screen and (min-width: 769px) and (max-width: 1200px) {
+
+.fs-4 {
+  font-size: calc(1.275rem + .3vw) !important;
+  margin: 0 5%;
+}
+}
