@@ -36,6 +36,6 @@ run:
     - name: DATABASE_PASSWORD
       value: "12345"
     - name: DATABASE_HOST
-      value: "localhost"
+      value: "*"
     - name: DATABASE_PORT
       value: "5432"
