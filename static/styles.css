@@ -83,7 +83,79 @@ btn-check:active+.btn-primary:focus, .btn-check:checked+.btn-primary:focus, .btn
 
 
 
+@media only screen and (max-width: 768px) { 
+    .hero-content {
+        
+        position: relative;
+        margin-top:98%;
+        margin-left: 4%;
+    }
+    .popular-section {
+        position: relative;
+        margin-top: 3%;
+        margin-left: 8%;
+        gap: 5vh;
 
+    }
+    .popular-section div h6 {
+        
+        padding: 5px 10px 5px;
+        font-weight: 500;
+        position: relative;
+        bottom: 2rem;
+        /* margin-left: 0.5%; */
+        width: 100%;
+    
+ }
+ input[type="search"] {
+    width: 100%;
+    line-height: 3;
+    border-radius: 25px;
+    border-color: #f57d20;
+    padding: 2px 15px;
+    margin-left: -5px;
+    margin-top: -5px;
+}
+
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1200px) { 
+    .hero-content {
+        
+        position: relative;
+        margin-top:38%;
+        margin-left: 4%;
+    }
+    .popular-section {
+        position: relative;
+        margin-top: 3%;
+        margin-left: 8%;
+        gap: 5vh;
+
+    }
+    .popular-section div h6 {
+        
+        padding: 5px 10px 5px;
+        font-weight: 500;
+        position: absolute;
+        bottom: 0;
+        margin-left: 0.5%;
+        
+        width: 25%;
+        gap: 5vh;
+    
+ }
+ input[type="search"] {
+    width: 100%;
+    line-height: 3;
+    border-radius: 25px;
+    border-color: #f57d20;
+    padding: 2px 15px;
+    margin-left: -5px;
+    margin-top: -5px;
+}
+    
+ }
 
 
 

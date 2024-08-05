@@ -1,0 +1,1 @@
+{% if user.is_authenticated or user.is_staff %} {% url 'menu_items' %} {% else %} {% url 'log' %} {% endif %}
