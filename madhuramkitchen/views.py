@@ -47,7 +47,6 @@ def edit_blog(request, pk):
     
     return render(request, 'edit_blog.html', {'blog': blog})
 
-@csrf_exempt
 def delete_blog(request, pk):
     blog = get_object_or_404(Blog, pk=pk)
     blog.delete()
@@ -62,7 +61,7 @@ def blog_items(request):
     blogs = Blog.objects.all()
     return render(request, 'blog_items.html', {'blogs': blogs})
 
-
+@csrf_exempt
 def add_phone_number(request):
     if request.method == 'POST':
         phone_number = request.POST.get('phone_number')
@@ -259,7 +258,6 @@ def add_menu_item(request):
         form = MenuItemForm()
     return render(request, 'add_menu_item.html', {'form': form})
 
-@csrf_exempt
 def menu_items(request):
     categories = Category.objects.all()
     menu_items = MenuItem.objects.all()
