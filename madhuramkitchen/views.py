@@ -303,6 +303,7 @@ def menu_items(request):
         'error_message': error_message
     })
 
+@csrf_exempt
 def order_successful(request):
     order_items = request.session.get('order_items')
     total_price = request.session.get('total_price')
