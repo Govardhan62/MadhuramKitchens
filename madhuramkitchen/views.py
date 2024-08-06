@@ -207,8 +207,8 @@ def signup(request):
 @csrf_exempt
 def log(request):
     if request.method == 'POST':
-        phone_number =request.POST['phone_number']
-        password =request.POST['password']
+        phone_number =request.POST.get('phone_number')
+        password =request.POST.get('password')
 
         user = auth.authenticate(phone_number=phone_number,password=password)
         if user is not None:
