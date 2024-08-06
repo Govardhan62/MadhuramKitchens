@@ -177,10 +177,74 @@
     </div>
     
 </section>
+    <div class="container">
+  <h1>Menu Items</h1>
+  {% if error_message %}
+      <p class="error">{{ error_message }}</p>
+  {% endif %}
 
+  <form method="post" action="{% if user.is_authenticated or user.is_staff %}{% url 'menu_items' %}{% else %}{% url 'log' %}{% endif %}">
+      {% csrf_token %}
+      
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+          {% for category in categories %}
+              <li class="nav-item" role="presentation">
+                  <a class="nav-link {% if forloop.first %}active{% endif %}" id="{{ category.name|slugify }}-tab" data-toggle="tab" href="#{{ category.name|slugify }}" role="tab"
+                      aria-controls="{{ category.name|slugify }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">{{ category.name }}</a>
+              </li>
+          {% endfor %}
+      </ul>
 
-    <script src="{% static 'bootstrap.bundle.min.js' %}"></script>
+      <!-- Tab panes -->
+      <div class="tab-content mt-3">
+          {% for category in categories %}
+              <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="{{ category.name|slugify }}" role="tabpanel" aria-labelledby="{{ category.name|slugify }}-tab">
+                  {% if category.image %}
+                      <img src="{{ category.image.url }}" alt="{{ category.name }}" class="category-image">
+                  {% endif %}
+                  <div class="menu-items">
+                      {% for item in menu_items %}
+                          {% if item.category.id == category.id %}
+                              <div class="menu-item">
+                                  {% if item.image %}
+                                      <img src="{{ item.image.url }}" alt="{{ item.dish_name }}" class="item-image">
+                                  {% else %}
+                                      <img src="{% static 'placeholder-image.jpg' %}" alt="Placeholder" class="item-image">
+                                  {% endif %}
+                                  <input type="checkbox" name="menu_items" value="{{ item.id }}">
+                                  <label>
+                                      {% if item.dish_type == 'veg' %}
+                                          <img src="{% static 'images/veg-icon.png' %}" alt="Veg" class="dish-type-icon">
+                                      {% elif item.dish_type == 'non_veg' %}
+                                          <img src="{% static 'images/non-veg.jpeg' %}" alt="Non-Veg" class="dish-type-icon">
+                                      {% elif item.dish_type == 'green_leafy' %}
+                                          <img src="{% static 'images/veg-icon.png' %}" alt="Green Leafy" class="dish-type-icon">
+                                      {% endif %}
+                                      {{ item.dish_name }} - ₹{{ item.price }}
+                                      {% if item.recommended_dish %}
+                                          <span class="recommended-text">Must-Try</span>
+                                      {% endif %}
+                                  </label>
+                                  <input type="number" name="quantities" min="1" value="1" class="quantity">
+                              </div>
+                          {% endif %}
+                      {% endfor %}
+                  </div>
+              </div>
+          {% endfor %}
+      </div>
 
-      <script src="{% static 'sidebars.js' %}"></script>
-  </body>
+      <button type="submit" class="order-button mt-3">Place Order</button>
+  </form>
+</div>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="{% static 'bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'sidebars.js' %}"></script>
+</body>
 </html>
+
