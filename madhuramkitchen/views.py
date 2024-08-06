@@ -30,7 +30,7 @@ def create_blog(request):
 
     return render(request, 'create_blog.html')
 
-
+@csrf_exempt
 def edit_blog(request, pk):
     blog = get_object_or_404(Blog, pk=pk)
     if request.method == 'POST':
@@ -258,6 +258,7 @@ def add_menu_item(request):
         form = MenuItemForm()
     return render(request, 'add_menu_item.html', {'form': form})
 
+@csrf_exempt
 def menu_items(request):
     categories = Category.objects.all()
     menu_items = MenuItem.objects.all()
@@ -302,6 +303,7 @@ def menu_items(request):
         'error_message': error_message
     })
 
+@csrf_exempt
 def order_successful(request):
     order_items = request.session.get('order_items')
     total_price = request.session.get('total_price')
@@ -371,7 +373,7 @@ def edit_items(request):
     }
     return render(request, 'edit_menuitems.html', context)
 
-
+@csrf_exempt
 def edit_menuitem(request, item_id):
     menu_item = get_object_or_404(MenuItem, id=item_id)
     if request.method == 'POST':
