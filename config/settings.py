@@ -87,7 +87,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('DATABASE_NAME', 'madhuramkitchen'),
         'USER': os.getenv('DATABASE_USER', 'postgres'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD', 'Ninesoft123'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD', 'Ninesoft1234'),
         'HOST': os.getenv('DATABASE_HOST', 'my-db1-instance.cpwy0kssc35o.ap-south-1.rds.amazonaws.com'),
         'PORT': os.getenv('DATABASE_PORT', '5432'),
     }
