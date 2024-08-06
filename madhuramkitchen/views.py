@@ -258,6 +258,7 @@ def add_menu_item(request):
         form = MenuItemForm()
     return render(request, 'add_menu_item.html', {'form': form})
 
+@csrf_exempt
 def menu_items(request):
     categories = Category.objects.all()
     menu_items = MenuItem.objects.all()
@@ -302,7 +303,6 @@ def menu_items(request):
         'error_message': error_message
     })
 
-@csrf_exempt
 def order_successful(request):
     order_items = request.session.get('order_items')
     total_price = request.session.get('total_price')
