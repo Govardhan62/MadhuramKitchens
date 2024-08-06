@@ -34,7 +34,7 @@ run:
     - name: DATABASE_USER
       value: "postgres"
     - name: DATABASE_PASSWORD
-      value: "12345"
+      value: "Ninesoft123"
     - name: DATABASE_HOST
       value: "my-db-instance.cpwy0kssc35o.ap-south-1.rds.amazonaws.com"
     - name: DATABASE_PORT
