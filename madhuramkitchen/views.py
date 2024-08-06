@@ -258,7 +258,7 @@ def add_menu_item(request):
         form = MenuItemForm()
     return render(request, 'add_menu_item.html', {'form': form})
 
-@csrf_exempt
+
 def menu_items(request):
     categories = Category.objects.all()
     menu_items = MenuItem.objects.all()
