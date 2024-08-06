@@ -30,12 +30,12 @@ run:
     - name: ALLOWED_HOSTS
       value: "*"
     - name: DATABASE_NAME
-      value:"madhuramkitchen" 
+      value: "my-db-instance" 
     - name: DATABASE_USER
       value: "postgres"
     - name: DATABASE_PASSWORD
       value: "12345"
     - name: DATABASE_HOST
-      value: "*"
+      value: "my-db-instance.cpwy0kssc35o.ap-south-1.rds.amazonaws.com"
     - name: DATABASE_PORT
       value: "5432"
