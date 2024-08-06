@@ -30,7 +30,7 @@ run:
     - name: ALLOWED_HOSTS
       value: "*"
     - name: DATABASE_NAME
-      value: "my-db-instance" 
+      value: "madhuramkitchen" 
     - name: DATABASE_USER
       value: "postgres"
     - name: DATABASE_PASSWORD
