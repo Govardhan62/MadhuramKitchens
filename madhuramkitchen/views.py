@@ -17,7 +17,7 @@ def health_check(request):
     return HttpResponse("OK", status=200)
 
 
-
+@csrf_exempt
 def create_blog(request):
     if request.method == 'POST':
         title = request.POST.get('title')
@@ -234,6 +234,7 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
+@csrf_exempt
 def add_category(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST, request.FILES)
@@ -245,6 +246,7 @@ def add_category(request):
         form = CategoryForm()
     return render(request, 'add_category.html', {'form': form})
 
+@csrf_exempt
 def add_menu_item(request):
     if request.method == 'POST':
         form = MenuItemForm(request.POST, request.FILES)
