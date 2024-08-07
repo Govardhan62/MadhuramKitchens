@@ -50,7 +50,7 @@ def edit_blog(request, pk):
     
     return render(request, 'edit_blog.html', {'blog': blog})
 
-@require_POST
+@csrf_exempt
 def delete_blog(request, pk):
     blog = get_object_or_404(Blog, pk=pk)
     blog.delete()
@@ -389,7 +389,7 @@ def edit_menuitem(request, item_id):
         form = MenuItemForm(instance=menu_item)
     return render(request, 'add_menu_item.html', {'form': form, 'menu_item': menu_item})
 
-
+@csrf_exempt
 def delete_menuitem(request, item_id):
     menu_item = get_object_or_404(MenuItem, id=item_id)
     if request.method == 'POST':
