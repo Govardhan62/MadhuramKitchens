@@ -402,7 +402,7 @@ def category_list(request):
     categories = Category.objects.all()
     return render(request, 'category_list.html', {'categories': categories})
 
-@require_POST
+@csrf_exempt
 def delete_category(request, pk):
     category = get_object_or_404(Category, pk=pk)
     category.delete()
