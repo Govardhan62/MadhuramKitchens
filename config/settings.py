@@ -25,10 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-r(vctop4h_)2ciq#!38tr(bsr^qoyr%t$7*buweve1ikl=&1%0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 # DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://wvpd5atp4i.ap-south-1.awsapprunner.com/']
 
 
 # Application definition
