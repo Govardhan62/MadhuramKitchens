@@ -11,6 +11,9 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+from django.urls import reverse
 
 
 def health_check(request):
@@ -47,6 +50,7 @@ def edit_blog(request, pk):
     
     return render(request, 'edit_blog.html', {'blog': blog})
 
+@require_POST
 def delete_blog(request, pk):
     blog = get_object_or_404(Blog, pk=pk)
     blog.delete()
@@ -385,10 +389,34 @@ def edit_menuitem(request, item_id):
         form = MenuItemForm(instance=menu_item)
     return render(request, 'add_menu_item.html', {'form': form, 'menu_item': menu_item})
 
-@csrf_exempt
+@require_POST
 def delete_menuitem(request, item_id):
     menu_item = get_object_or_404(MenuItem, id=item_id)
     if request.method == 'POST':
         menu_item.delete()
         return redirect('edit_items')
     return render(request, 'delete_menuitem.html', {'menu_item': menu_item})
+
+@csrf_exempt
+def category_list(request):
+    categories = Category.objects.all()
+    return render(request, 'category_list.html', {'categories': categories})
+
+@require_POST
+def delete_category(request, pk):
+    category = get_object_or_404(Category, pk=pk)
+    category.delete()
+    return redirect('category_list')
+
+@csrf_exempt
+def edit_category(request, pk=None):
+    category = get_object_or_404(Category, pk=pk) if pk else None
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, request.FILES, instance=category)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Category updated successfully.')
+            return redirect('category_list')
+    else:
+        form = CategoryForm(instance=category)
+    return render(request, 'edit_category.html', {'form': form, 'category': category})

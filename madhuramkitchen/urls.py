@@ -1,7 +1,7 @@
 from django.urls import path, include
 from .views import index, health_check,add_category, add_menu_item, menu_items, order_successful, log,signup,logout,supervisor, \
 supervisorlogout, orders_table,users_table,back,dashboard,add_phone_number,create_blog,edit_blog,blog_list,delete_blog, \
-blog_items, edit_items,edit_menuitem,delete_menuitem
+blog_items, edit_items,edit_menuitem,delete_menuitem,category_list,delete_category,edit_category
 
 
 urlpatterns = [
@@ -29,4 +29,7 @@ urlpatterns = [
     path('edit_menuitem/<int:item_id>/', edit_menuitem, name='edit_menuitem'),
     path('delete_menuitmem/<int:item_id>/',delete_menuitem, name='delete_menuitem'),
     path('order_successful/', order_successful, name='order_successful'),  # Updated from place_order
+    path('category_list', category_list, name='category_list'),
+    path('categories/delete/<int:pk>/', delete_category, name='delete_category'),
+    path('categories/edit/<int:pk>/', edit_category, name='edit_category'),
 ]

@@ -6,10 +6,20 @@ class CategoryForm(forms.ModelForm):
         model = Category
         fields = ['name', 'description', 'image']
 
+    def __init__(self, *args, **kwargs):
+        self.instance = kwargs.get('instance')
+        super().__init__(*args, **kwargs)
+
     def clean_name(self):
         name = self.cleaned_data.get('name')
-        if Category.objects.filter(name=name).exists():
-            raise forms.ValidationError("Category with this name already exists.")
+        if self.instance and self.instance.pk:
+            # If editing an existing category, exclude it from the duplicate check
+            if Category.objects.filter(name=name).exclude(pk=self.instance.pk).exists():
+                raise forms.ValidationError("Category with this name already exists.")
+        else:
+            # If creating a new category, check for duplicates
+            if Category.objects.filter(name=name).exists():
+                raise forms.ValidationError("Category with this name already exists.")
         return name
 
 class MenuItemForm(forms.ModelForm):

@@ -18,4 +18,5 @@ django-storages==1.13.2
 email-validator
 waitress==3.0.0
 gunicorn==20.1.0
-psycopg2-binary==2.9.6
+psycopg2
+#psycopg2-binary==2.9.6

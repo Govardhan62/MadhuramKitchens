@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,13 +21,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-r(vctop4h_)2ciq#!38tr(bsr^qoyr%t$7*buweve1ikl=&1%0'
+#SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-r(vctop4h_)2ciq#!38tr(bsr^qoyr%t$7*buweve1ikl=&1%0')
+SECRET_KEY ='django-insecure-r(vctop4h_)2ciq#!38tr(bsr^qoyr%t$7*buweve1ikl=&1%0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-# DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+#DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+DEBUG =True
 
-ALLOWED_HOSTS = ['*']
+#ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
+
+ALLOWED_HOSTS=[]
 
 
 # Application definition
@@ -85,13 +87,35 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DATABASE_NAME', 'madhuramkitchen'),
-        'USER': os.getenv('DATABASE_USER', 'postgres'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD', 'Ninesoft1234'),
-        'HOST': os.getenv('DATABASE_HOST', 'my-db1-instance.cpwy0kssc35o.ap-south-1.rds.amazonaws.com'),
-        'PORT': os.getenv('DATABASE_PORT', '5432'),
+        'NAME': 'madhuramkitchen',
+        'USER':'postgres',
+        "PASSWORD": "Ninesoft1234",
+        "HOST": "my-db1-instance.cpwy0kssc35o.ap-south-1.rds.amazonaws.com",
+        "PORT": "5432",
     }
 }
+
+# Logging configuration
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'django_debug.log'),
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -127,34 +151,32 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS =[
-    os.path.join(BASE_DIR,'static')
-]
-STATIC_ROOT =os.path.join(BASE_DIR,'assets/')
+# STATIC_URL = 'static/'
 
 # STATIC_ROOT = BASE_DIR / "staticfiles"
 
-MEDIA_URL ='/media/'
+# MEDIA_URL ='/media/'
 
-MEDIA_ROOT = BASE_DIR / "media"
+# MEDIA_ROOT = BASE_DIR / "media"
 
 
-STORAGES = {
-    "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
+# STORAGES = {
+#     "default": {
+#         "BACKEND": "django.core.files.storage.FileSystemStorage",
+#     },
+#     "staticfiles": {
+#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+#     },
+# }
 
-APPEND_SLASH=False
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# APPEND_SLASH=False
+
+# # Default primary key field type
+# # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+
+# DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
@@ -175,13 +197,49 @@ AUTHENTICATION_BACKENDS = [
     
 ]  
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
-EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))
-EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True') == 'True'
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'madhuramkitchens.com@gmail.com')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'smvh wwyx ewry mvtj')
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
+# EMAIL_PORT = os.environ.get('EMAIL_PORT', 587)
+# EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', True) == 'True'
+# EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'madhuramkitchens.com@gmail.com')
+# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'smvh wwyx ewry mvtj')
 
+
+
+STATIC_URL = 'static/'
+STATICFILES_DIRS =[
+    os.path.join(BASE_DIR,'static')
+]
+STATIC_ROOT =os.path.join(BASE_DIR,'assets')
+
+APPEND_SLASH=False
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_URL ='/media/'
+MEDIA_ROOT =os.path.join(BASE_DIR,'media')
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = 'True'
+EMAIL_HOST_USER = 'madhuramkitchens.com@gmail.com'
+EMAIL_HOST_PASSWORD = 'smvh wwyx ewry mvtj'
+
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': '100%',
+    },
+}
 
 
 
