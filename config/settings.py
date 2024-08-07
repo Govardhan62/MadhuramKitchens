@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-r(vctop4h_)2ciq#!38tr(bsr^qoyr%t$7*buweve1ikl=&1%0
 DEBUG = False
 # DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['wvpd5atp4i.ap-south-1.awsapprunner.com/']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
