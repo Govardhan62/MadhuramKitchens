@@ -182,7 +182,7 @@ EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True') == 'True'
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'madhuramkitchens.com@gmail.com')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'smvh wwyx ewry mvtj')
 
-
+CSRF_TRUSTED_ORIGINS=['*']
 
 
 
