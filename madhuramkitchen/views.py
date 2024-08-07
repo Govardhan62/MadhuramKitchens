@@ -389,7 +389,7 @@ def edit_menuitem(request, item_id):
         form = MenuItemForm(instance=menu_item)
     return render(request, 'add_menu_item.html', {'form': form, 'menu_item': menu_item})
 
-@require_POST
+
 def delete_menuitem(request, item_id):
     menu_item = get_object_or_404(MenuItem, id=item_id)
     if request.method == 'POST':
