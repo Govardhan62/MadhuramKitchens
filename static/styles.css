@@ -158,14 +158,6 @@ btn-check:active+.btn-primary:focus, .btn-check:checked+.btn-primary:focus, .btn
  }
 
 
-
-
-
-
-
-
-
-
 @media (min-width: 1200px) {
     .h1, h1 {
         font-size: 3rem;

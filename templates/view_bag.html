@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selected item details</title>
+</head>
+<style>
+    .bag-container {
+        padding: 20px;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .bag-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    .bag-table th,
+    .bag-table td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+    }
+
+    .bag-summary {
+        text-align: right;
+        margin-bottom: 20px;
+    }
+
+    .place-order-button {
+        background-color: #28a745;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .place-order-button:hover {
+        background-color: #218838;
+    }
+
+    .back-to-items-button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+    .back-to-items-button:hover {
+        background-color: #0056b3;
+    }
+
+    .messages {
+        margin-top: 20px;
+    }
+
+    .alert {
+        padding: 10px;
+        color: white;
+        margin-bottom: 15px;
+    }
+
+    .alert.success {
+        background-color: #4CAF50;
+    }
+
+    .alert.warning {
+        background-color: #f44336;
+    }
+</style>
+
+<body>
+    <div class="bag-container">
+        <h1>Your Bag</h1>
+
+        {% if items %}
+        <table class="bag-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>₹{{ item.price }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>₹{{ item.item_total }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="bag-summary">
+            <p><strong>Total Price: ₹{{ total_price }}</strong></p>
+        </div>
+
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="place-order-button">Place Order</button>
+        </form>
+
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="alert {{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="back-to-items">
+            <a href="{% url 'index' %}" class="back-to-items-button">Back to Items</a>
+        </div>
+        <br>
+        {% else %}
+        <h3>Your bag is empty!</h3>
+        <div class="back-to-items">
+            <a href="{% url 'index' %}" class="back-to-items-button">Back to Items</a>
+        </div>
+        <br>
+        {% endif %}
+    </div>
+
+
+</body>
+
+</html>

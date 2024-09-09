@@ -14,6 +14,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.urls import reverse
+import json
+
 
 
 def health_check(request):
@@ -64,6 +66,9 @@ def blog_list(request):
 def blog_items(request):
     blogs = Blog.objects.all()
     return render(request, 'blog_items.html', {'blogs': blogs})
+
+def events(request):
+    return render(request, 'events.html')
 
 @csrf_exempt
 def add_phone_number(request):
@@ -262,50 +267,189 @@ def add_menu_item(request):
         form = MenuItemForm()
     return render(request, 'add_menu_item.html', {'form': form})
 
-@csrf_exempt
 def menu_items(request):
     categories = Category.objects.all()
     menu_items = MenuItem.objects.all()
-    error_message = None
+    
+    cart = request.session.get('cart', {})
+    
+    # Pass the cart (which contains saved quantities) to the template
+    context = {
+        'categories': categories,
+        'menu_items': menu_items,
+        'cart': cart,
+    }
+    
+    return render(request, 'menu.html', context)
+
+
+# @csrf_exempt
+# def menu_items(request):
+#     if request.method == 'POST':
+#         selected_items = request.POST.getlist('menu_items')
+#         quantities = request.POST.getlist('quantities')
+
+#         cart_items = request.session.get('cart_items', [])
+#         total_price = Decimal(request.session.get('total_price', 0.00))
+
+#         new_cart_items = []
+#         total_items_count = 0
+
+#         # Filter out items where the quantity is greater than 0
+#         for item_id, quantity in zip(selected_items, quantities):
+#             if int(quantity) > 0:  # Add only if quantity is greater than 0
+#                 item = MenuItem.objects.get(id=item_id)
+#                 item_total_price = item.price * Decimal(quantity)
+#                 total_price += item_total_price
+#                 total_items_count += int(quantity)  # Increment item count
+#                 new_cart_items.append({
+#                     'menu_item': item.dish_name,
+#                     'quantity': quantity,
+#                     'price': float(item_total_price)
+#                 })
+
+#         # Update session with new items and total price
+#         if new_cart_items:
+#             cart_items.extend(new_cart_items)
+#             request.session['cart_items'] = cart_items
+#             request.session['total_price'] = float(total_price)
+#             request.session['total_items_count'] = total_items_count
+
+#         # Redirect to the bag (or cart) page or remain on the menu page
+#         return redirect('menu_items')
+#     return redirect('menu_items')
+
+
+
+def view_bag(request):
+    cart = request.session.get('cart', {})
+    items = []
+    total_price = 0
+
+    # Check if there are any items in the cart
+    if cart:
+        for dish_id, data in cart.items():
+            dish = MenuItem.objects.get(id=dish_id)  # Fetch the dish from the database
+            item_total = dish.price * data['quantity']
+            total_price += item_total
+            items.append({
+                'name': dish.dish_name,
+                'price': dish.price,
+                'quantity': data['quantity'],
+                'item_total': item_total
+            })
+    else:
+        items = None
 
     if request.method == 'POST':
-        selected_items = request.POST.getlist('menu_items')
-        quantities = request.POST.getlist('quantities')
+        if cart:
+            # Create a new order
+            order = Order.objects.create(
+                user=request.user,
+                total_price=total_price
+            )
+            # Add order items
+            for dish_id, data in cart.items():
+                dish = MenuItem.objects.get(id=dish_id)
+                OrderItem.objects.create(
+                    order=order,
+                    menu_item=dish,
+                    quantity=data['quantity']
+                )
+            # Clear the cart after placing the order
+            request.session['cart'] = {}
+            request.session['total_items_count'] = 0
+            request.session['total_price'] = 0.00
+            messages.success(request, "Order placed successfully!")
 
-        if not selected_items:
-            error_message = "Please select at least one item."
-        else:
-            order_items = []
-            total_price = Decimal('0.00')
-            valid_order = False
+        # else:
+        #     messages.warning(request, "Your bag is empty!")
 
-            for item_id, quantity in zip(selected_items, quantities):
-                if int(quantity) > 0:  # Ensure that the quantity is greater than 0
-                    valid_order = True
-                    item = MenuItem.objects.get(id=item_id)
-                    item_total_price = item.price * Decimal(quantity)
-                    total_price += item_total_price
-                    order_items.append({
-                        'menu_item_id': item.id,
-                        'menu_item_dish_name': item.dish_name,
-                        'quantity': quantity,
-                        'price': float(item_total_price)
-                    })
+    context = {
+        'items': items,
+        'total_price': total_price
+    }
 
-            if valid_order:
-                # Save order details in session
-                request.session['order_items'] = order_items
-                request.session['total_price'] = float(total_price)
-                # Redirect to order successful page
-                return redirect('order_successful')
+    return render(request, 'view_bag.html', context)
+
+def add_to_bag(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        selected_items = data.get('menu_items', [])
+        quantities = data.get('quantities', [])
+
+        # Get existing cart from session or create a new one if none exists
+        cart = request.session.get('cart', {})
+        total_items_count = 0
+        total_price = Decimal(0.00)
+
+        # Process the newly selected items and their quantities
+        for dish_id, quantity in zip(selected_items, quantities):
+            quantity = int(quantity)
+
+            # Remove item if quantity is set to 0
+            if quantity == 0:
+                if dish_id in cart:
+                    del cart[dish_id]
             else:
-                error_message = "Please select at least one item with a quantity greater than 0."
+                dish = MenuItem.objects.get(id=dish_id)
+                cart[dish_id] = {
+                    'quantity': quantity,
+                    'price': float(dish.price)
+                }
+                total_items_count += quantity
+                total_price += Decimal(dish.price) * quantity
 
-    return render(request, 'menu_items.html', {
-        'menu_items': menu_items,
-        'categories': categories,
-        'error_message': error_message
-    })
+        # Save updated cart in session
+        request.session['cart'] = cart
+        request.session['total_items_count'] = total_items_count
+        request.session['total_price'] = float(total_price)  # Make sure it's float for JSON serialization
+
+        return JsonResponse({'total_items_count': total_items_count})
+    
+    return JsonResponse({'error': 'Invalid request'}, status=400)
+# def add_to_bag(request):
+#     if request.method == 'POST':
+#         data = json.loads(request.body)
+#         dish_id = data['dish_id']
+#         quantity = data['quantity']
+        
+#         # Your logic to add the item to the bag here
+#         # Example:
+#         # cart = request.session.get('cart', {})
+#         # cart[dish_id] = cart.get(dish_id, 0) + int(quantity)
+#         # request.session['cart'] = cart
+#         # Update the total items count
+#         total_items_count = sum(request.session['cart'].values())
+#         request.session['total_items_count'] = total_items_count
+        
+#         return JsonResponse({'total_items_count': total_items_count})
+
+
+def place_order(request):
+    cart = request.session.get('cart', {})
+    if cart:
+        total_price = request.session.get('total_price', 0)
+        order = Order.objects.create(user=request.user, total_price=total_price)
+
+        for dish_id, item_data in cart.items():
+            dish = MenuItem.objects.get(id=dish_id)
+            OrderItem.objects.create(
+                order=order,
+                menu_item=dish,
+                quantity=item_data['quantity']
+            )
+
+        # Clear the cart after placing the order
+        request.session['cart'] = {}
+        request.session['total_items_count'] = 0
+        request.session['total_price'] = 0
+
+        return redirect('order_confirmation')
+    
+    return redirect('menu_items')
+
+
 
 @csrf_exempt
 def order_successful(request):
@@ -359,13 +503,13 @@ def order_successful(request):
 
     send_mail(subject_admin, plain_message_admin, from_email, [to_admin], html_message=html_message_admin)
 
-
     return render(request, 'order_successful.html', {
         'order': order,
         'order_items': order_items,
         'total_price': total_price,
         'user':user
     })
+
 
 
 def edit_items(request):

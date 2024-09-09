@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        .main-container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-heading {
+            text-align: center;
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        .event-section {
+            margin-bottom: 40px;
+        }
+
+        .event-content {
+            display: flex;
+            /* Flexbox layout for horizontal alignment */
+            align-items: flex-start;
+            /* Align items to the top */
+            margin-bottom: 20px;
+        }
+
+        .event-image-container {
+            flex: 0 0 auto;
+            /* Prevent image container from stretching */
+            margin-right: 20px;
+            /* Space between image and text */
+        }
+
+        .event-image {
+            width: 200px;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .event-text {
+            flex: 1;
+            /* Allow text container to take up remaining space */
+        }
+
+        .event-heading {
+            font-size: 28px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .event-description {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .event-content {
+                flex-direction: column;
+                /* Stack image and text vertically */
+                align-items: center;
+                /* Center items */
+                text-align: center;
+                /* Center text */
+            }
+
+            .event-image-container {
+                margin-right: 0;
+                /* Remove right margin */
+                margin-bottom: 20px;
+                /* Add bottom margin for spacing */
+            }
+
+            .event-image {
+                width: 100%;
+                /* Make image responsive */
+                max-width: 300px;
+                /* Optional: Limit maximum width */
+                height: auto;
+                /* Maintain aspect ratio */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-container {
+                width: 90%;
+                /* Adjust container width for smaller screens */
+            }
+
+            .main-heading {
+                font-size: 28px;
+                /* Reduce heading size */
+            }
+
+            .event-heading {
+                font-size: 24px;
+                /* Reduce subheading size */
+            }
+
+            .event-description {
+                font-size: 14px;
+                /* Reduce text size for readability */
+            }
+        }
+
+        .custom-footer {
+            background-color: #ff6600;
+            /* Orange background color */
+            color: #000;
+            /* Black text color */
+            text-align: center;
+            padding: 40px 0 20px 0;
+            /* Adjust the top padding value for more space */
+            font-family: Arial, sans-serif;
+        }
+
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        .footer-links {
+            margin: 10px 0;
+        }
+
+        .footer-links a {
+            color: #000;
+            /* Black color for links */
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+            /* Underline on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="header-container">
+            <a href="/" class="back-button" style="float: left;">Back to Home</a>
+            <h1 class="main-heading">Events</h1>
+        </div>
+
+        <div class="event-section">
+            <div class="event-content">
+                <div class="event-image-container">
+                    <img src="static/images/sv8ryz6k.png" alt="Wedding" class="event-image">
+                </div>
+                <div class="event-text">
+                    <h2 class="event-heading">Wedding</h2>
+                    <p class="event-description">
+                        Celebrate your special day with us! Our wedding events are designed to create unforgettable
+                        memories, tailored to your needs, with beautiful decorations, exquisite cuisine, and a stunning
+                        venue.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="event-section">
+            <div class="event-content">
+                <div class="event-image-container">
+                    <img src="static\images\zltclk6a.png" alt="Birthday" class="event-image">
+                </div>
+                <div class="event-text">
+                    <h2 class="event-heading">Birthday</h2>
+                    <p class="event-description">Make your birthday a day to remember! We offer themed birthday parties
+                        with
+                        custom decorations, delicious cakes, and entertainment options for all ages.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="event-section">
+            <div class="event-content">
+                <div class="event-image-container">
+                    <img src="static\images\qomnlbws.png" alt="Kitty" class="event-image">
+                </div>
+                <div class="event-text">
+                    <h2 class="event-heading">Kitty</h2>
+                    <p class="event-description">Enjoy a cozy and fun kitty party with your friends. We provide a
+                        charming
+                        setting, delightful snacks, and an atmosphere that encourages laughter and relaxation.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="event-section">
+            <div class="event-content">
+                <div class="event-image-container">
+                    <img src="static\images\6cllqz4p.png" alt="Private" class="event-image">
+                </div>
+                <div class="event-text">
+                    <h2 class="event-heading">Private</h2>
+                    <p class="event-description">Host an intimate private event in an exclusive setting. Our team will
+                        ensure privacy, luxury, and exceptional service for your special occasion.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="event-section">
+            <div class="event-content">
+                <div class="event-image-container">
+                    <img src="static\images\owuqjbxx.png" alt="Corporate" class="event-image">
+                </div>
+                <div class="event-text">
+                    <h2 class="event-heading">Corporate</h2>
+                    <p class="event-description">Plan your next corporate event with us. We offer professional settings
+                        for
+                        meetings, conferences, and team-building activities, complete with high-tech facilities and
+                        catering
+                        services.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="event-section">
+            <div class="event-content">
+                <div class="event-image-container">
+                    <img src="static\images\tafl6snw.png" alt="House Warming" class="event-image">
+                </div>
+                <div class="event-text">
+                    <h2 class="event-heading">House Warming</h2>
+                    <p class="event-description">Celebrate your new home with a delightful housewarming party. We offer
+                        customized decor, light refreshments, and a warm ambiance to make this event special for you and
+                        your guests.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="custom-footer">
+        <div class="footer-content">
+            <p>Copyright © 2024 MADHURAM KITCHENS - All Rights Reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms and Conditions</a>
+            </div>
+            <!-- <hr>
+      <p>Powered by GoDaddy</p> -->
+        </div>
+    </footer>
+</body>
+
+</html>
