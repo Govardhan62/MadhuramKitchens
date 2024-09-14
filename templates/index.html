@@ -577,8 +577,9 @@
           <h1><strong>Feel the aroma of Andhra Special Cuisine. We are happy to serve!</strong></h1>
           <p style="margin-top: 2%; display: grid;"><img
               src="https://t3.ftcdn.net/jpg/05/65/04/44/360_F_565044485_AGGMO7oJdGPABPdMYnx8y0yC1sKCE3YJ.jpg"
-              height="20" /> Choose your favourite menu </p>
-          <input type="search" id="menu-search" placeholder="Search for any item" oninput="filterMenu()">
+              height="20" /> Choose your favourite menu 
+            </p>
+              <input type="search" placeholder="Search for any item">
          
         </div>
         <div class="col-5"></div>
@@ -707,57 +708,6 @@
       </form>
   </div>
   
-
-
-    <script>
-      function filterMenu() {
-        // Get the search term and convert it to lowercase
-        const searchTerm = document.getElementById('menu-search').value.toLowerCase();
-
-        // Get all menu items
-        const menuCards = document.querySelectorAll('.menu-card');
-        const resultsContainer = document.getElementById('search-results');
-
-        // Clear any existing results
-        resultsContainer.innerHTML = '';
-
-        // If no search term, hide the search results box
-        if (searchTerm === '') {
-          resultsContainer.style.display = 'none';
-          return;
-        }
-
-        // Loop through each item and display matching results
-        let hasResults = false; // Check if we have any matching items
-
-        menuCards.forEach(card => {
-          const dishName = card.getAttribute('data-name');
-          const categoryName = card.getAttribute('data-category');
-
-          // Check if the search term is found in the dish name or category
-          if (dishName.includes(searchTerm) || categoryName.includes(searchTerm)) {
-            hasResults = true;
-            const dishId = card.querySelector('button').getAttribute('onclick').match(/\d+/)[0];
-            const dishName = card.querySelector('.menu-item-name').textContent;
-
-            // Create a new search result item
-            const resultItem = document.createElement('div');
-            resultItem.classList.add('search-item');
-            resultItem.innerHTML = `<h3>${dishName}</h3> <button class="select-btn" onclick="toggleSelect(this, '${dishId}')">Select ✔</button>`;
-
-            resultsContainer.appendChild(resultItem);
-          }
-        });
-
-        // Show the results container if there are matching items
-        if (hasResults) {
-          resultsContainer.style.display = 'block';
-        } else {
-          resultsContainer.style.display = 'none';
-        }
-      }
-    </script>
-
 
     <!-- <script>
       function toggleSelect(button, dishId) {
