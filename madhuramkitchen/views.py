@@ -15,6 +15,8 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.urls import reverse
 import json
+from django.contrib.auth.decorators import login_required
+from .email_utils import send_order_confirmation_email, send_admin_order_notification
 
 
 
@@ -320,135 +322,176 @@ def menu_items(request):
 #     return redirect('menu_items')
 
 
+# @require_POST
+# def add_to_bag(request):
+#     data = json.loads(request.body)
+#     dish_id = str(data.get('dish_id'))  # Convert to string for session keys
+#     action = data.get('action')
 
-def view_bag(request):
-    cart = request.session.get('cart', {})
-    items = []
-    total_price = 0
+#     # Retrieve or initialize the bag from the session
+#     bag = request.session.get('bag', {})
+#     total_items_count = request.session.get('total_items_count', 0)
 
-    # Check if there are any items in the cart
-    if cart:
-        for dish_id, data in cart.items():
-            dish = MenuItem.objects.get(id=dish_id)  # Fetch the dish from the database
-            item_total = dish.price * data['quantity']
-            total_price += item_total
-            items.append({
-                'name': dish.dish_name,
-                'price': dish.price,
-                'quantity': data['quantity'],
-                'item_total': item_total
-            })
-    else:
-        items = None
+#     if action == 'selected':
+#         # If dish is already in the bag, increase quantity
+#         if dish_id in bag:
+#             bag[dish_id] += 1
+#         else:
+#             bag[dish_id] = 1  # Add dish with a quantity of 1
+#         total_items_count += 1
+#     elif action == 'unselected':
+#         # Remove dish if it's in the bag
+#         if dish_id in bag:
+#             total_items_count -= bag[dish_id]  # Reduce total by item quantity
+#             del bag[dish_id]  # Remove the item completely
 
-    if request.method == 'POST':
-        if cart:
-            # Create a new order
-            order = Order.objects.create(
-                user=request.user,
-                total_price=total_price
-            )
-            # Add order items
-            for dish_id, data in cart.items():
-                dish = MenuItem.objects.get(id=dish_id)
-                OrderItem.objects.create(
-                    order=order,
-                    menu_item=dish,
-                    quantity=data['quantity']
-                )
-            # Clear the cart after placing the order
-            request.session['cart'] = {}
-            request.session['total_items_count'] = 0
-            request.session['total_price'] = 0.00
-            messages.success(request, "Order placed successfully!")
+#     # Update the session with new bag contents and item count
+#     request.session['bag'] = bag
+#     request.session['total_items_count'] = total_items_count
+#     request.session.modified = True  # Mark session as modified to trigger save
 
-        # else:
-        #     messages.warning(request, "Your bag is empty!")
+#     return JsonResponse({
+#         'total_items_count': total_items_count,
+#         'item_quantity': bag.get(dish_id, 0)  # Return updated quantity for the item
+#     })
 
-    context = {
-        'items': items,
-        'total_price': total_price
-    }
-
-    return render(request, 'view_bag.html', context)
 
 def add_to_bag(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        selected_items = data.get('menu_items', [])
-        quantities = data.get('quantities', [])
+        dish_id = str(data['dish_id'])  # Convert to string for consistency with session
+        action = data['action']
 
-        # Get existing cart from session or create a new one if none exists
-        cart = request.session.get('cart', {})
-        total_items_count = 0
-        total_price = Decimal(0.00)
+        # Initialize the session bag and item count
+        bag = request.session.get('bag', {})
+        total_items_count = request.session.get('total_items_count', 0)
 
-        # Process the newly selected items and their quantities
-        for dish_id, quantity in zip(selected_items, quantities):
-            quantity = int(quantity)
-
-            # Remove item if quantity is set to 0
-            if quantity == 0:
-                if dish_id in cart:
-                    del cart[dish_id]
+        if action == 'selected':
+            # Add or increment the item in the bag
+            if dish_id in bag:
+                bag[dish_id] += 1  # Increment the quantity
             else:
-                dish = MenuItem.objects.get(id=dish_id)
-                cart[dish_id] = {
-                    'quantity': quantity,
-                    'price': float(dish.price)
-                }
-                total_items_count += quantity
-                total_price += Decimal(dish.price) * quantity
+                bag[dish_id] = 1  # Add a new item with a quantity of 1
+            total_items_count += 1
+        elif action == 'unselected':
+            if dish_id in bag:
+                total_items_count -= bag[dish_id]  # Adjust the count
+                del bag[dish_id]  # Remove the item from the bag
 
-        # Save updated cart in session
-        request.session['cart'] = cart
+        # Update the session with the new bag and item count
+        request.session['bag'] = bag
         request.session['total_items_count'] = total_items_count
-        request.session['total_price'] = float(total_price)  # Make sure it's float for JSON serialization
 
         return JsonResponse({'total_items_count': total_items_count})
-    
-    return JsonResponse({'error': 'Invalid request'}, status=400)
-# def add_to_bag(request):
+
+# @login_required(login_url='log')
+# def view_bag(request):
+#     # Retrieve the bag from the session
+#     bag = request.session.get('bag', {})
+#     items = []
+
+#     # Fetch the items from the database
+#     if bag:
+#         for dish_id in bag.items():
+#             dish = MenuItem.objects.get(id=dish_id)
+#             items.append({
+#                 'id': dish.id,
+#                 'name': dish.dish_name,
+                
+#             })
+
+#     # Handle order placement
 #     if request.method == 'POST':
-#         data = json.loads(request.body)
-#         dish_id = data['dish_id']
-#         quantity = data['quantity']
-        
-#         # Your logic to add the item to the bag here
-#         # Example:
-#         # cart = request.session.get('cart', {})
-#         # cart[dish_id] = cart.get(dish_id, 0) + int(quantity)
-#         # request.session['cart'] = cart
-#         # Update the total items count
-#         total_items_count = sum(request.session['cart'].values())
-#         request.session['total_items_count'] = total_items_count
-        
-#         return JsonResponse({'total_items_count': total_items_count})
+#         if not request.user.is_authenticated:
+#             return JsonResponse({'success': False, 'message': "Please login to place the order."}, status=403)
 
+#         if bag:
+#             # Create a new order
+#             order = Order.objects.create(user=request.user)
+            
+#             # Add order items
+#             for dish_id in bag.items():
+#                 dish = get_object_or_404(MenuItem, id=dish_id)
+#                 OrderItem.objects.create(order=order, menu_item=dish)
 
-def place_order(request):
-    cart = request.session.get('cart', {})
-    if cart:
-        total_price = request.session.get('total_price', 0)
-        order = Order.objects.create(user=request.user, total_price=total_price)
+#             # Clear the bag after the order is placed
+#             request.session['bag'] = {}
+#             request.session['total_items_count'] = 0
+#             request.session.modified = True
 
-        for dish_id, item_data in cart.items():
-            dish = MenuItem.objects.get(id=dish_id)
-            OrderItem.objects.create(
-                order=order,
-                menu_item=dish,
-                quantity=item_data['quantity']
+#             # Set a session variable to show a success popup
+#             request.session['show_popup'] = True
+
+#             # Return a success JSON response
+#             return JsonResponse({'success': True})
+
+#     # Check if the popup should be displayed
+#     show_popup = request.session.pop('show_popup', False)
+
+#     context = {
+#         'items': items,
+#         'show_popup': show_popup
+#     }
+
+#     return render(request, 'view_bag.html', context)
+
+def view_bag(request):
+    # Retrieve the bag from the session
+    bag = request.session.get('bag', [])
+    items = []
+
+    # If there are any items in the bag
+    if bag:
+        for dish_id in bag:
+            dish = MenuItem.objects.get(id=dish_id)  # Fetch the dish from the database
+            items.append({
+                'name': dish.dish_name
+            })
+    else:
+        items = None
+
+    # Handle POST request for placing an order
+    if request.method == 'POST':
+        if not request.user.is_authenticated:
+            return JsonResponse({'success': False, 'message': "Please login to place the order."}, status=403)
+
+        if bag:
+            # Create a new order
+            order = Order.objects.create(
+                user=request.user
             )
+            
+            # Add order items (only using menu_item, no quantity or total)
+            for dish_id in bag:
+                dish = MenuItem.objects.get(id=dish_id)
+                OrderItem.objects.create(
+                    order=order,
+                    menu_item=dish
+                )
+            
+            # Clear the bag after placing the order
+            request.session['bag'] = []
+            request.session['total_items_count'] = 0
 
-        # Clear the cart after placing the order
-        request.session['cart'] = {}
-        request.session['total_items_count'] = 0
-        request.session['total_price'] = 0
+            # Set session variable to trigger popup
+            request.session['show_popup'] = True
 
-        return redirect('order_confirmation')
+            # Send confirmation email
+            send_order_confirmation_email(order, request.user.email)
+            send_admin_order_notification(order)
+
+            # Return a success JSON response
+            return JsonResponse({'success': True})
+
+    # Check if the popup should be displayed
+    show_popup = request.session.pop('show_popup', False)
+
+    context = {
+        'items': items,
+        'show_popup': show_popup
+    }
     
-    return redirect('menu_items')
-
+    return render(request, 'view_bag.html', context)
 
 
 @csrf_exempt

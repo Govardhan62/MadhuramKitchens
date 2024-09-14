@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+</head>
+<body>
+    <h2>Thank you for your order, {{ customer.username }}!</h2>
+    <p>Your order has been successfully placed. Here are the details:</p>
+
+    <h3>Order Summary:</h3>
+    
+    <ul>
+        {% for item in items %}
+            <li>{{ item.menu_item.dish_name }} </li>
+        {% endfor %}
+    </ul>
+
+
+    <p>If you have any questions, feel free to contact us!</p>
+</body>
+</html>

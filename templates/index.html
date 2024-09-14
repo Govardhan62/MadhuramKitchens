@@ -108,6 +108,32 @@
       /* Adjust font size if necessary */
     }
 
+    .menu-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+
+    .card {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin: 20px;
+      width: 300px;
+      padding: 15px;
+    }
+
+    .card-category {
+      font-size: 1.5em;
+      color: orange;
+      margin-bottom: 10px;
+    }
+
+    .card-body {
+      margin-top: 10px;
+    }
+
 
     .menu-container {
       width: 100%;
@@ -128,8 +154,12 @@
     .menu-item {
       display: flex;
       justify-content: space-between;
-      padding: 15px 0;
-      border-bottom: 1px solid #ccc;
+      padding: 8px 0;
+      border-bottom: 1px solid #f1f1f1;
+    }
+
+    .menu-item:last-child {
+      border-bottom: none;
     }
 
     .menu-item-info {
@@ -145,24 +175,24 @@
       margin-bottom: 5px;
     }
 
-    .menu-item-description {
+    /* .menu-item-description {
       font-size: 14px;
       color: #666;
       margin-bottom: 10px;
-    }
+    } */
 
-    .menu-item-dots {
+    /* .menu-item-dots {
       flex-grow: 1;
       height: 1px;
       border-bottom: 1px dotted #ccc;
       margin: 0 10px;
-    }
+    } */
 
-    .menu-item-price {
+    /* .menu-item-price {
       font-size: 18px;
       font-weight: bold;
       margin-right: 20px;
-    }
+    } */
 
     .add-btn {
       background-color: #007bff;
@@ -241,51 +271,130 @@
     }
 
     .bag-icon-container {
-      position: relative;
-      display: inline-block;
-      margin-right: 20px;
-      cursor: pointer;
+      position: fixed;
+      top: 10px;
+      right: 20px;
+      z-index: 1000;
+      /* Ensure it stays on top of other elements */
     }
 
     .bag-icon-link {
       text-decoration: none;
+      color: inherit;
     }
 
     .bag-icon {
       position: relative;
+      display: flex;
+      align-items: center;
       font-size: 24px;
       /* Adjust the size of the bag icon */
-      color: #333;
-    }
-
-    .bag-icon i {
-      font-size: 50px;
-      /* Adjust icon size */
-      color: #000;
-      /* Set icon color */
+      background-color: #ff6700;
+      padding: 10px;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
     }
 
     .bag-count {
       position: absolute;
-      top: -10px;
-      right: -10px;
-      background-color: red;
+      top: -5px;
+      right: -5px;
+      background-color: #ff0000;
       color: white;
-      font-size: 14px;
-      padding: 2px 6px;
       border-radius: 50%;
-      width: 22px;
-      height: 22px;
-      text-align: center;
-      line-height: 18px;
-      font-weight: bold;
-      border: 2px solid white;
-      /* Add white border around the count */
+      padding: 5px;
+      font-size: 12px;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    .bag-icon:hover i {
-      color: orange;
-      /* Hover effect for the bag icon */
+    .menu-cards {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .menu-card {
+      border: 1px solid #ddd;
+      padding: 20px;
+      width: 250px;
+      text-align: left;
+      border-radius: 10px;
+      margin: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+
+    .menu-card:hover {
+      transform: scale(1.05);
+    }
+
+    .menu-item-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .menu-item-name {
+      color: #333;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .select-btn {
+      background-color: #ffcc00;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s;
+      margin-left: 10px;
+    }
+
+    .select-btn.selected {
+      background-color: #4CAF50;
+      /* Green for selected */
+      color: white;
+    }
+
+    .select-btn.unselected {
+      background-color: #f44336;
+      /* Red for unselected */
+      color: white;
+    }
+
+    .search-results {
+      border: 1px solid #ccc;
+      max-height: 200px;
+      overflow-y: scroll;
+      margin-top: 10px;
+      background-color: #fff;
+      width: 100%;
+    }
+
+    .search-item {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      cursor: pointer;
+    }
+
+    .search-item:hover {
+      background-color: #f0f0f0;
+    }
+
+    .search-item h3 {
+      display: inline-block;
+    }
+
+    .select-btn {
+      float: right;
+      margin-right: 10px;
     }
   </style>
 
@@ -296,6 +405,43 @@
   <link href="{% static 'site.css' %}" rel="stylesheet">
   <link href="{% static 'menu.css' %}" rel="stylesheet">
 </head>
+
+<script>
+  function toggleSelect(button, dishId) {
+    const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+    const isSelected = button.classList.contains('selected');
+    const action = isSelected ? 'unselected' : 'selected';
+
+    fetch("{% url 'add_to_bag' %}", {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': csrfToken,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'dish_id': dishId,
+        'action': action
+      })
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Update the bag count
+        document.querySelector('.bag-count').textContent = data.total_items_count;
+
+        // Toggle button text and classes
+        if (action === 'selected') {
+          button.textContent = 'Unselect ✖';
+          button.classList.add('selected');
+          button.classList.remove('unselected');
+        } else {
+          button.textContent = 'Select ✔';
+          button.classList.remove('selected');
+          button.classList.add('unselected');
+        }
+      })
+      .catch(error => console.error('Error:', error));
+  }
+</script>
 
 <body>
 
@@ -403,15 +549,15 @@
           {% endif %}
         </ul>
 
-        <div class="col-md-3 text-end">
+        <div class="col-md-3">
           {% if user.is_authenticated %}
           <span class="me-2">Welcome, {{ user.username }}!</span>
           <a href="{% url 'logout' %}">
             <button type="button" class="btn btn-outline-primary me-2">Logout</button>
           </a>
-          <a href="{% url 'menu_items' %}">
+          <!-- <a href="{% url 'menu_items' %}">
             <button type="button" class="btn btn-primary">View Menu</button>
-          </a>
+          </a> -->
           {% endif %}
         </div>
       </header>
@@ -432,7 +578,8 @@
           <p style="margin-top: 2%; display: grid;"><img
               src="https://t3.ftcdn.net/jpg/05/65/04/44/360_F_565044485_AGGMO7oJdGPABPdMYnx8y0yC1sKCE3YJ.jpg"
               height="20" /> Choose your favourite menu </p>
-          <input type="search" placeholder="Search for any item">
+          <input type="search" id="menu-search" placeholder="Search for any item" oninput="filterMenu()">
+         
         </div>
         <div class="col-5"></div>
       </div>
@@ -528,42 +675,130 @@
 
     <div class="menu-container">
       <h1 class="menu-heading">Menu</h1>
-
-      <form id="menu-form">
-        {% csrf_token %}
-
-        {% for category in categories %}
-        <ul class="menu">
+  
+      <form id="menu-form" method="POST">
+          {% csrf_token %}
+  
+          {% for category in categories %}
           <h2 style="color: orange;">{{ category.name }}</h2>
-          {% for dish in menu_items %}
-          {% if dish.category == category %}
-          <li class="menu-item">
-            <input type="hidden" name="menu_items" value="{{ dish.id }}">
-            <span class="menu-item-name">{{ dish.dish_name }}</span>
-            <div class="menu-item-line">
-              <span class="menu-item-price">₹{{ dish.price }}</span>
-              <div class="quantity-controller">
-                <!-- Check if the dish is in the cart and pre-fill the quantity -->
-                <input type="number" name="quantities" min="0" value="0" class="quantity"
-                  style="width:35px; height: 20px;">
+          <div class="menu-cards">
+              {% for dish in menu_items %}
+              {% if dish.category.id == category.id %}
+              <!-- Each dish in a card -->
+              <div class="menu-card">
+                  <div class="menu-item-flex">
+                      <h3 class="menu-item-name">{{ dish.dish_name }}</h3>
+  
+                      <!-- Select/Unselect button -->
+                      <button type="button" class="select-btn {% if dish.id|stringformat:"s" in request.session.bag %}selected{% else %}unselected{% endif %}" 
+                          onclick="toggleSelect(this, '{{ dish.id }}')">
+                          {% if dish.id|stringformat:"s" in request.session.bag %}
+                          Unselect ✖
+                          {% else %}
+                          Select ✔
+                          {% endif %}
+                      </button>
+                  </div>
               </div>
-            </div>
-          </li>
-          {% endif %}
+              {% endif %}
+              {% endfor %}
+          </div>
           {% endfor %}
-        </ul>
-        {% endfor %}
-
-        <!-- Add to Bag button at the end of the form -->
-        <button type="button" class="add-to-bag">Add to Bag</button>
-
       </form>
+  </div>
+  
 
-      <!-- <div class="place-order-container">
-        <button class="place-order-button" onclick="placeOrder()">Place Order</button>
-      </div> -->
 
-    </div>
+    <script>
+      function filterMenu() {
+        // Get the search term and convert it to lowercase
+        const searchTerm = document.getElementById('menu-search').value.toLowerCase();
+
+        // Get all menu items
+        const menuCards = document.querySelectorAll('.menu-card');
+        const resultsContainer = document.getElementById('search-results');
+
+        // Clear any existing results
+        resultsContainer.innerHTML = '';
+
+        // If no search term, hide the search results box
+        if (searchTerm === '') {
+          resultsContainer.style.display = 'none';
+          return;
+        }
+
+        // Loop through each item and display matching results
+        let hasResults = false; // Check if we have any matching items
+
+        menuCards.forEach(card => {
+          const dishName = card.getAttribute('data-name');
+          const categoryName = card.getAttribute('data-category');
+
+          // Check if the search term is found in the dish name or category
+          if (dishName.includes(searchTerm) || categoryName.includes(searchTerm)) {
+            hasResults = true;
+            const dishId = card.querySelector('button').getAttribute('onclick').match(/\d+/)[0];
+            const dishName = card.querySelector('.menu-item-name').textContent;
+
+            // Create a new search result item
+            const resultItem = document.createElement('div');
+            resultItem.classList.add('search-item');
+            resultItem.innerHTML = `<h3>${dishName}</h3> <button class="select-btn" onclick="toggleSelect(this, '${dishId}')">Select ✔</button>`;
+
+            resultsContainer.appendChild(resultItem);
+          }
+        });
+
+        // Show the results container if there are matching items
+        if (hasResults) {
+          resultsContainer.style.display = 'block';
+        } else {
+          resultsContainer.style.display = 'none';
+        }
+      }
+    </script>
+
+
+    <!-- <script>
+      function toggleSelect(button, dishId) {
+        const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+        const isSelected = button.classList.contains('selected');  // Check if item is already selected
+        const action = isSelected ? 'unselected' : 'selected';  // Determine the action based on the current state
+    
+        // Make the fetch request to add or remove the dish from the bag
+        fetch("{% url 'add_to_bag' %}", {
+          method: 'POST',
+          headers: {
+            'X-CSRFToken': csrfToken,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            'dish_id': dishId,
+            'action': action
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          // Update the bag count in the UI
+          document.querySelector('.bag-count').textContent = data.total_items_count;
+    
+          // Toggle the button text and styles based on the action
+          if (action === 'selected') {
+            button.textContent = 'Unselect ✖';  // Change button text to "Unselect"
+            button.classList.add('selected');   // Add 'selected' class for styling
+            button.classList.remove('unselected');  // Remove 'unselected' class
+          } else {
+            button.textContent = 'Select ✔';  // Change button text to "Select"
+            button.classList.remove('selected');  // Remove 'selected' class
+            button.classList.add('unselected');  // Add 'unselected' class for styling
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('An error occurred. Please try again.');  // Handle errors with an alert or error display
+        });
+      }
+    </script> -->
 
     <div class="bag-icon-container">
       <a href="{% url 'view_bag' %}" class="bag-icon-link">
@@ -575,33 +810,72 @@
     </div>
 
 
+
     <script>
-      document.querySelector('.add-to-bag').addEventListener('click', function () {
-        const formData = new FormData(document.getElementById('menu-form'));
-        const menu_items = formData.getAll('menu_items');
-        const quantities = formData.getAll('quantities');
+      document.querySelectorAll('.add-to-bag').forEach(button => {
+        button.addEventListener('click', function () {
+          const dishId = this.getAttribute('data-dish-id');
+          const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
 
-        const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+          // Add item to bag (using fetch to make a POST request)
+          fetch("{% url 'add_to_bag' %}", {
+            method: 'POST',
+            headers: {
+              'X-CSRFToken': csrfToken,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              dish_id: dishId,
+              action: 'selected'
+            })
+          })
+            .then(response => response.json())
+            .then(data => {
+              // Update the bag count
+              document.querySelector('.bag-count').textContent = data.total_items_count;
 
-        fetch("{% url 'add_to_bag' %}", {
-          method: 'POST',
-          headers: {
-            'X-CSRFToken': csrfToken,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            menu_items: menu_items,
-            quantities: quantities
+              // Hide "Add to Bag" and show "Remove from Bag"
+              button.style.display = 'none';
+              const removeButton = document.querySelector(`.remove-from-bag[data-dish-id="${dishId}"]`);
+              removeButton.style.display = 'inline-block';
+            })
+            .catch(error => console.error('Error:', error));
+        });
+      });
+
+      // Remove from bag logic
+      document.querySelectorAll('.remove-from-bag').forEach(button => {
+        button.addEventListener('click', function () {
+          const dishId = this.getAttribute('data-dish-id');
+          const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+          // Remove item from bag
+          fetch("{% url 'add_to_bag' %}", {
+            method: 'POST',
+            headers: {
+              'X-CSRFToken': csrfToken,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              dish_id: dishId,
+              action: 'unselected'
+            })
           })
-        })
-          .then(response => response.json())
-          .then(data => {
-            // Update the bag count
-            document.querySelector('.bag-count').textContent = data.total_items_count;
-          })
-          .catch(error => console.error('Error:', error));
+            .then(response => response.json())
+            .then(data => {
+              // Update the bag count
+              document.querySelector('.bag-count').textContent = data.total_items_count;
+
+              // Hide "Remove from Bag" and show "Add to Bag"
+              button.style.display = 'none';
+              const addButton = document.querySelector(`.add-to-bag[data-dish-id="${dishId}"]`);
+              addButton.style.display = 'inline-block';
+            })
+            .catch(error => console.error('Error:', error));
+        });
       });
     </script>
+
 
 
     <!-- <div class="container">
@@ -907,9 +1181,10 @@
           <a href="#">Terms and Conditions</a>
         </div>
         <!-- <hr>
-      <p>Powered by GoDaddy</p> -->
+              <p>Powered by GoDaddy</p> -->
       </div>
     </footer>
+
 
 </body>
 

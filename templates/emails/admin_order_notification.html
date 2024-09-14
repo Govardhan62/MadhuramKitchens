@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Order Notification</title>
+</head>
+<body>
+    <h2>New Order from {{ customer.username }}</h2>
+    <p>Here are the order details:</p>
+
+    <h3>Customer Information:</h3>
+    <p>Name: {{ customer.username }}</p>
+    <p>Email: {{ customer.email }}</p>
+
+    <h3>Order Summary:</h3>
+    <ul>
+        {% for item in items %}
+            <li>{{ item.menu_item.dish_name }} </li>
+        {% endfor %}
+    </ul>
+
+
+    <p>Please proceed with order fulfillment.</p>
+</body>
+</html>

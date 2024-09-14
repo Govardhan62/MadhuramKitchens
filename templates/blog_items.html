@@ -1,26 +1,98 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Items</title>
     <link rel="stylesheet" href="{% static 'blog.css' %}">
+
+    <style>
+
+html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            flex: 1;
+            padding: 20px;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        .custom-footer {
+            background-color: #ff6600;
+            /* Orange background color */
+            color: #000;
+            /* Black text color */
+            text-align: center;
+            padding: 40px 0 20px 0;
+            /* Adjust the top padding value for more space */
+            font-family: Arial, sans-serif;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        .footer-links {
+            margin: 10px 0;
+        }
+
+        .footer-links a {
+            color: #000;
+            /* Black color for links */
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+            /* Underline on hover */
+        }
+    </style>
 </head>
+
 <body>
     <div class="container">
         <h1>Our Blog</h1>
         <div class="blog-list">
             {% for blog in blogs %}
-                <div class="blog-item">
-                    <h2>{{ blog.title }}</h2>
-                    {% if blog.image %}
-                        <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
-                    {% endif %}
-                    <p>{{ blog.description|safe }}</p>
-                </div>
+            <div class="blog-item">
+                <h2>{{ blog.title }}</h2>
+                {% if blog.image %}
+                <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
+                {% endif %}
+                <p>{{ blog.description|safe }}</p>
+            </div>
             {% endfor %}
         </div>
     </div>
+
+    <footer class="custom-footer">
+        <div class="footer-content">
+            <p>Copyright © 2024 MADHURAM KITCHENS - All Rights Reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms and Conditions</a>
+            </div>
+        </div>
+    </footer>
+
 </body>
+
 </html>

@@ -8,8 +8,7 @@
 </head>
 <style>
     .bag-container {
-        padding: 20px;
-        max-width: 600px;
+        max-width: 800px;
         margin: 0 auto;
     }
 
@@ -22,59 +21,88 @@
     .bag-table th,
     .bag-table td {
         border: 1px solid #ddd;
-        padding: 10px;
-        text-align: left;
+        padding: 8px;
+        text-align: center;
     }
 
     .bag-summary {
-        text-align: right;
         margin-bottom: 20px;
     }
 
-    .place-order-button {
-        background-color: #28a745;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        cursor: pointer;
-    }
-
-    .place-order-button:hover {
-        background-color: #218838;
-    }
-
+    .place-order-button,
+    .login-button,
     .back-to-items-button {
-        background-color: #007bff;
+        background-color: #ff6700;
         color: white;
         padding: 10px 20px;
         text-decoration: none;
+        border: none;
         border-radius: 5px;
+        cursor: pointer;
     }
 
+    .place-order-button:hover,
+    .login-button:hover,
     .back-to-items-button:hover {
-        background-color: #0056b3;
+        background-color: #ff4500;
     }
 
-    .messages {
+    /* Popup Styles */
+    .popup-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .popup-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .success-tick {
+        font-size: 50px;
+        color: green;
+    }
+
+    .order-details-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .popup-buttons {
         margin-top: 20px;
     }
 
-    .alert {
-        padding: 10px;
+    /* .home-button,
+    .login-button {
+        padding: 10px 20px;
+        background-color: #007bff;
         color: white;
-        margin-bottom: 15px;
-    }
+        text-decoration: none;
+        border-radius: 5px;
+    } */
 
-    .alert.success {
-        background-color: #4CAF50;
-    }
-
-    .alert.warning {
-        background-color: #f44336;
+    .alert {
+        background-color: #dff0d8;
+        color: #3c763d;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 20px;
     }
 </style>
 
 <body>
+    <div class="back-to-items">
+        <a href="{% url 'index' %}" class="back-to-items-button">Back to Items</a>
+    </div>
     <div class="bag-container">
         <h1>Your Bag</h1>
 
@@ -83,31 +111,32 @@
             <thead>
                 <tr>
                     <th>Item</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Total</th>
+                  
                 </tr>
             </thead>
             <tbody>
                 {% for item in items %}
                 <tr>
                     <td>{{ item.name }}</td>
-                    <td>₹{{ item.price }}</td>
-                    <td>{{ item.quantity }}</td>
-                    <td>₹{{ item.item_total }}</td>
+                    
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
 
-        <div class="bag-summary">
-            <p><strong>Total Price: ₹{{ total_price }}</strong></p>
-        </div>
-
-        <form method="POST">
+        <!-- Order or Login button -->
+        <form method="POST" id="place-order-form">
             {% csrf_token %}
+            {% if request.user.is_authenticated %}
             <button type="submit" class="place-order-button">Place Order</button>
+            {% else %}
+            <a href="{% url 'log' %}" class="login-button">Login/Signup to Place Order</a>
+            {% endif %}
         </form>
+        <br>
+        <br>
+        <!-- Back to Items button -->
+       
 
         {% if messages %}
         <div class="messages">
@@ -119,20 +148,73 @@
         </div>
         {% endif %}
 
-        <div class="back-to-items">
-            <a href="{% url 'index' %}" class="back-to-items-button">Back to Items</a>
-        </div>
-        <br>
         {% else %}
         <h3>Your bag is empty!</h3>
-        <div class="back-to-items">
-            <a href="{% url 'index' %}" class="back-to-items-button">Back to Items</a>
-        </div>
-        <br>
+       
         {% endif %}
     </div>
 
+    <!-- Hidden Popup for order confirmation -->
+    <div id="confirmation-popup" class="popup-container" style="display: none;">
+        <div class="popup-content">
+            <span class="success-tick">✔</span>
+            <h2>Order Placed Successfully!</h2>
+            <p>Your order has been placed successfully.</p>
 
+            <h3>Order Details:</h3>
+            <ul class="order-details-list">
+                {% for item in items %}
+                <li>{{ item.name }}</li>
+                {% endfor %}
+            </ul>
+           
+
+            <!-- Show Home button if logged in, Login button if not -->
+            <div class="popup-buttons">
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'index' %}" class="home-button">Home</a>
+                <!-- {% else %}
+                <a href="{% url 'log' %}" class="login-button">Login/Signup</a> -->
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Include JavaScript to handle the popup -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('place-order-form');
+            const popup = document.getElementById('confirmation-popup');
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();  // Prevent default form submission
+
+                fetch("{% url 'view_bag' %}", {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value,
+                    },
+                    body: new FormData(form)  // Send the form data to the server
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            throw new Error('Order placement failed');
+                        }
+                    })
+                    .then(data => {
+                        if (data.success) {
+                            // Display the popup
+                            popup.style.display = 'block';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
+        });
+    </script>
 </body>
 
 </html>
