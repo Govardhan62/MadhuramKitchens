@@ -355,15 +355,19 @@ def menu_items(request):
 #         'item_quantity': bag.get(dish_id, 0)  # Return updated quantity for the item
 #     })
 
-
 def add_to_bag(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         dish_id = str(data['dish_id'])  # Convert to string for consistency with session
         action = data['action']
 
-        # Initialize the session bag and item count
+        # Ensure the session 'bag' is a dictionary
         bag = request.session.get('bag', {})
+
+        # If bag is not a dictionary, reinitialize it
+        if not isinstance(bag, dict):
+            bag = {}
+
         total_items_count = request.session.get('total_items_count', 0)
 
         if action == 'selected':
@@ -383,6 +387,7 @@ def add_to_bag(request):
         request.session['total_items_count'] = total_items_count
 
         return JsonResponse({'total_items_count': total_items_count})
+
 
 # @login_required(login_url='log')
 # def view_bag(request):
@@ -607,3 +612,6 @@ def edit_category(request, pk=None):
     else:
         form = CategoryForm(instance=category)
     return render(request, 'edit_category.html', {'form': form, 'category': category})
+
+
+
