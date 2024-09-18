@@ -85,17 +85,18 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 import ssl
+
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'madhuram',  # Replace with your database name
+        'NAME': os.getenv('MONGO_DB_NAME', 'madhuram'),
         'CLIENT': {
-            'host': 'mongodb+srv://madhuramkitchens:e5AaQ9ZFofmCmzyM@cluster0.nsum0.mongodb.net/your_db_name?retryWrites=true&w=majority',
-            'username': 'madhuramkitchens',  # Replace with your MongoDB username
-            'password': 'e5AaQ9ZFofmCmzyM',  # Replace with your MongoDB password
-            'authSource': 'admin',  # Ensure the correct authentication database
-            'ssl': True,  # Enforce SSL connection
-            'ssl_cert_reqs': ssl.CERT_NONE  # Direct reference to the ssl constant
+            'host': os.getenv('MONGO_DB_HOST', 'mongodb+srv://madhuramkitchens.e5AaQ9ZFofmCmzyM@cluster0.nsum0.mongodb.net/your_db_name?retryWrites=true&w=majority'),
+            'username': os.getenv('MONGO_DB_USERNAME', 'madhuramkitchens'),
+            'password': os.getenv('MONGO_DB_PASSWORD', 'e5AaQ9ZFofmCmzyM'),
+            'authSource': 'admin',
+            'ssl': True,
+            'ssl_cert_reqs': ssl.CERT_NONE
         }
     }
 }

@@ -32,13 +32,12 @@ run:
       value: 'django-insecure-r(vctop4h_)2ciq#!38tr(bsr^qoyr%t$7*buweve1ikl=&1%0'
     - name: ALLOWED_HOSTS
       value: "*"
-    - name: DATABASE_NAME
-      value: "madhuramkitchen" 
-    - name: DATABASE_USER
-      value: "postgres"
-    - name: DATABASE_PASSWORD
-      value: "Ninesoft1234"
-    - name: DATABASE_HOST
-      value: "my-db1-instance.cpwy0kssc35o.ap-south-1.rds.amazonaws.com"
-    - name: DATABASE_PORT
-      value: "5432"
+    - name: MONGO_DB_NAME
+      value: "madhuram" 
+    - name: MONGO_DB_HOST
+      value: "mongodb+srv://madhuramkitchens.e5AaQ9ZFofmCmzyM@cluster0.nsum0.mongodb.net/your_db_name?retryWrites=true&w=majority"
+    - name: MONGO_DB_USERNAME
+      value: "madhuramkitchens"
+    - name: MONGO_DB_PASSWORD
+      value: "e5AaQ9ZFofmCmzyM"
+
