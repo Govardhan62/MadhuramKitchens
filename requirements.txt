@@ -15,4 +15,8 @@ python-decouple==3.7
 boto3==1.26.0
 django-storages==1.13.2
 email-validator
+djongo
+dnspython
+pymongo==3.12.3
+pytz
 

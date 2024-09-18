@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+import ssl
+from pymongo import MongoClient
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -82,16 +84,23 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+import ssl
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DATABASE_NAME', 'madhuramkitchen'),
-        'USER': os.getenv('DATABASE_USER', 'postgres'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD', 'Ninesoft1234'),
-        'HOST': os.getenv('DATABASE_HOST', 'my-db1-instance.cpwy0kssc35o.ap-south-1.rds.amazonaws.com'),
-        'PORT': os.getenv('DATABASE_PORT', '5432'),
+        'ENGINE': 'djongo',
+        'NAME': 'madhuram',  # Replace with your database name
+        'CLIENT': {
+            'host': 'mongodb+srv://madhuramkitchens:e5AaQ9ZFofmCmzyM@cluster0.nsum0.mongodb.net/your_db_name?retryWrites=true&w=majority',
+            'username': 'madhuramkitchens',  # Replace with your MongoDB username
+            'password': 'e5AaQ9ZFofmCmzyM',  # Replace with your MongoDB password
+            'authSource': 'admin',  # Ensure the correct authentication database
+            'ssl': True,  # Enforce SSL connection
+            'ssl_cert_reqs': ssl.CERT_NONE  # Direct reference to the ssl constant
+        }
     }
 }
+
+
 # 'my-db1-instance.cpwy0kssc35o.ap-south-1.rds.amazonaws.com'
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
