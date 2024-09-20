@@ -32,12 +32,15 @@ run:
       value: 'django-insecure-r(vctop4h_)2ciq#!38tr(bsr^qoyr%t$7*buweve1ikl=&1%0'
     - name: ALLOWED_HOSTS
       value: "*"
-    - name: MONGO_DB_NAME
-      value: "madhuram" 
-    - name: MONGO_DB_HOST
-      value: "mongodb+srv://madhuramkitchens.e5AaQ9ZFofmCmzyM@cluster0.nsum0.mongodb.net/your_db_name?retryWrites=true&w=majority"
-    - name: MONGO_DB_USERNAME
-      value: "madhuramkitchens"
-    - name: MONGO_DB_PASSWORD
-      value: "e5AaQ9ZFofmCmzyM"
+    - name: DATABASE_NAME
+      value: "madhuram-db"  # Replace with your MySQL database name
+    - name: DATABASE_HOST
+      value: "madhuram-db.chm6gaasgekw.ap-south-1.rds.amazonaws.com"  # Replace with your MySQL host
+    - name: DATABASE_USERNAME
+      value: "admin"  # Replace with your MySQL username
+    - name: DATABASE_PASSWORD
+      value: "Govardhan628"  # Replace with your MySQL password
+    - name: DATABASE_PORT
+      value: "3306"  # Replace with your MySQL port (default is 3306)
+
 

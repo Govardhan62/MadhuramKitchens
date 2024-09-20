@@ -13,8 +13,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
-import ssl
-from pymongo import MongoClient
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -84,24 +82,43 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-import ssl
+# import ssl
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': os.getenv('MONGO_DB_NAME', 'madhuram'),
+#         'CLIENT': {
+#             'host': os.getenv('MONGO_DB_HOST', 'mongodb+srv://madhuramkitchens.e5AaQ9ZFofmCmzyM@cluster0.nsum0.mongodb.net/your_db_name?retryWrites=true&w=majority'),
+#             'username': os.getenv('MONGO_DB_USERNAME', 'madhuramkitchens'),
+#             'password': os.getenv('MONGO_DB_PASSWORD', 'e5AaQ9ZFofmCmzyM'),
+#             'authSource': 'admin',
+#             'ssl': True,
+#             'ssl_cert_reqs': ssl.CERT_NONE
+#         }
+#     }
+# }
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": "mydatabase",
+#     }
+# }
 
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
-        'NAME': os.getenv('MONGO_DB_NAME', 'madhuram'),
-        'CLIENT': {
-            'host': os.getenv('MONGO_DB_HOST', 'mongodb+srv://madhuramkitchens.e5AaQ9ZFofmCmzyM@cluster0.nsum0.mongodb.net/your_db_name?retryWrites=true&w=majority'),
-            'username': os.getenv('MONGO_DB_USERNAME', 'madhuramkitchens'),
-            'password': os.getenv('MONGO_DB_PASSWORD', 'e5AaQ9ZFofmCmzyM'),
-            'authSource': 'admin',
-            'ssl': True,
-            'ssl_cert_reqs': ssl.CERT_NONE
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.getenv('DATABASE_NAME', 'madhuram-db'),  # Database name from environment or default
+        'USER': os.getenv('DATABASE_USER', 'admin'),  # Username from environment or default
+        'PASSWORD': os.getenv('DATABASE_PASSWORD', 'Govardhan628'),  # Password from environment or default
+        'HOST': os.getenv('DATABASE_HOST', 'madhuram-db.chm6gaasgekw.ap-south-1.rds.amazonaws.com'),  # Host from environment or default
+        'PORT': os.getenv('DATABASE_PORT', '3306'),  # Port from environment or default
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",  # Optional MySQL setting
         }
     }
 }
-
-
 # 'my-db1-instance.cpwy0kssc35o.ap-south-1.rds.amazonaws.com'
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -194,7 +211,3 @@ EMAIL_HOST_PASSWORD = 'smvh wwyx ewry mvtj'
 ADMIN_EMAIL = 'saipaka61@gmail.com'
 
 CSRF_TRUSTED_ORIGINS=[]
-
-
-
-

@@ -25,7 +25,7 @@ class CategoryForm(forms.ModelForm):
 class MenuItemForm(forms.ModelForm):
     class Meta:
         model = MenuItem
-        fields = ['dish_name','dish_type','recommended_dish','description', 'price', 'category', 'image']
+        fields = ['dish_name','dish_type','recommended_dish','description', 'category', 'image']
 
     def clean_title(self):
         dish_name = self.cleaned_data.get('dish_name')
