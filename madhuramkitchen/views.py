@@ -355,7 +355,7 @@ def menu_items(request):
 #         'item_quantity': bag.get(dish_id, 0)  # Return updated quantity for the item
 #     })
 
-@csrf_token
+@csrf_exempt
 def add_to_bag(request):
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -441,7 +441,7 @@ def add_to_bag(request):
 
 #     return render(request, 'view_bag.html', context)
 
-@csrf_token
+@csrf_exempt
 def view_bag(request):
     # Retrieve the bag from the session
     bag = request.session.get('bag', [])
