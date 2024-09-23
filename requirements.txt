@@ -8,7 +8,7 @@ django-phonenumbers==1.0.1
 dnspython==2.6.1
 phonenumbers==8.13.45
 pillow==10.4.0
-psycopg2==2.9.9
+psycopg2-binary==2.9.9  # Changed to psycopg2-binary
 sqlparse==0.2.4
 typing_extensions==4.12.2
 tzdata==2024.1
