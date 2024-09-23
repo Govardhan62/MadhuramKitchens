@@ -33,14 +33,14 @@ run:
     - name: ALLOWED_HOSTS
       value: "*"
     - name: DATABASE_NAME
-      value: "madhuramkitchen"  # Replace with your MySQL database name
+      value: "madhuram"  # Replace with your MySQL database name
     - name: DATABASE_HOST
-      value: "madhuram-db.chm6gaasgekw.ap-south-1.rds.amazonaws.com"  # Replace with your MySQL host
+      value: "my-db1-instance.cpwy0kssc35o.ap-south-1.rds.amazonaws.com"  # Replace with your MySQL host
     - name: DATABASE_USERNAME
-      value: "admin"  # Replace with your MySQL username
+      value: "postgres"  # Replace with your MySQL username
     - name: DATABASE_PASSWORD
-      value: "Govardhan628"  # Replace with your MySQL password
+      value: "Ninesoft1234"  # Replace with your MySQL password
     - name: DATABASE_PORT
-      value: "3306"  # Replace with your MySQL port (default is 3306)
+      value: "5432"  # Replace with your MySQL port (default is 3306)
 
 
