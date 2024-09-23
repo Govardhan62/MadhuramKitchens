@@ -354,10 +354,6 @@ def menu_items(request):
 #         'total_items_count': total_items_count,
 #         'item_quantity': bag.get(dish_id, 0)  # Return updated quantity for the item
 #     })
-<<<<<<< HEAD
-
-=======
->>>>>>> 87bb87bda9105f261788b0534eee5ba92a3e2f03
 @csrf_exempt
 def add_to_bag(request):
     if request.method == 'POST':
@@ -443,13 +439,7 @@ def add_to_bag(request):
 #     }
 
 #     return render(request, 'view_bag.html', context)
-<<<<<<< HEAD
-
 @csrf_exempt
-
-=======
-@csrf_exempt
->>>>>>> 87bb87bda9105f261788b0534eee5ba92a3e2f03
 def view_bag(request):
     # Retrieve the bag from the session
     bag = request.session.get('bag', [])

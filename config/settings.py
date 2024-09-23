@@ -79,7 +79,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
-# Database
+# Database ///
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
@@ -96,10 +96,12 @@ DATABASES = {
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": "mydatabase",
+#        "NAME": "mydatabase",
 #     }
 # }
-# 'my-db1-instance.cpwy0kssc35o.ap-south-1.rds.amazonaws.com'
+
+
+# # 'my-db1-instance.cpwy0kssc35o.ap-south-1.rds.amazonaws.com'
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
