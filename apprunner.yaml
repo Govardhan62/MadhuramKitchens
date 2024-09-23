@@ -4,27 +4,18 @@ build:
   commands:
     build:
       - python3.11 -m ensurepip --upgrade # Upgrade pip (optional)
-      - pip3 install Django # Install Django and dependencies
       - pip3 install -r requirements.txt
+      - pip3 install gunicorn  # Install Gunicorn
     post-build:
       - python manage.py makemigrations
       - python manage.py migrate
-      - python manage.py collectstatic
-  env:
-    - name: DEBUG
-      value: "on"
-    - name: SECRET_KEY
-      value: 'django-insecure-r(vctop4h_)2ciq#!38tr(bsr^qoyr%t$7*buweve1ikl=&1%0'
-    - name: ALLOWED_HOSTS
-      value: "*"
+      - python manage.py collectstatic --noinput
+
 run:
   runtime-version: 3.11
-  command: pip3 install gunicorn config.wsgi # Install gunicorn at runtime
-  pre-run: [] # Remove pre-run section
-  command: gunicorn config.wsgi --log-file -
+  command: gunicorn config.wsgi:application --bind 0.0.0.0:8080 --log-file -
   network: 
-    port:  8080
-    env:   8080  
+    port: 8080
   env:
     - name: DEBUG
       value: "on"
@@ -33,14 +24,12 @@ run:
     - name: ALLOWED_HOSTS
       value: "*"
     - name: DATABASE_NAME
-      value: "madhuram" 
+      value: "madhuram"
     - name: DATABASE_HOST
-      value: "my-db1-instance.cpwy0kssc35o.ap-south-1.rds.amazonaws.com" 
+      value: "my-db1-instance.cpwy0kssc35o.ap-south-1.rds.amazonaws.com"
     - name: DATABASE_USERNAME
-      value: "postgres" 
+      value: "postgres"
     - name: DATABASE_PASSWORD
-      value: "Ninesoft1234"  
+      value: "Ninesoft1234"
     - name: DATABASE_PORT
-      value: "5432" 
-
-
+      value: "5432"
