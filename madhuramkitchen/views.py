@@ -562,7 +562,7 @@ def order_successful(request):
     })
 
 
-
+@csrf_exempt
 def edit_items(request):
     categories = Category.objects.all()
     menu_items = MenuItem.objects.all()
