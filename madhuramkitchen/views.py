@@ -614,4 +614,5 @@ def edit_category(request, pk=None):
     return render(request, 'edit_category.html', {'form': form, 'category': category})
 
 
-
+def about(request):
+    return render(request, 'about.html')
