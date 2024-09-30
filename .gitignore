@@ -94,6 +94,7 @@ cover/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+mydatabase
  
 # Flask stuff:
 instance/
@@ -196,3 +197,5 @@ cython_debug/
 #.idea/
  
  
+ # Ignore settings.py
+/config/settings.py

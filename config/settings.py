@@ -79,7 +79,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
-# Database
+# Database 
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 # DATABASES = {
@@ -94,18 +94,16 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # }
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": "mydatabase",
-    }
+     'default': {
+         'ENGINE': 'django.db.backends.postgresql',
+         'NAME': os.getenv('DATABASE_NAME', 'madhuram'),
+         'USER': os.getenv('DATABASE_USER', 'postgres'),
+         'PASSWORD': os.getenv('DATABASE_PASSWORD', 'Ninesoft1234'),
+         'HOST': os.getenv('DATABASE_HOST', 'my-db1-instance.cpwy0kssc35o.ap-south-1.rds.amazonaws.com'),
+         'PORT': os.getenv('DATABASE_PORT', '5432'),
+     }
 }
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#        "NAME": "mydatabase",
-#     }
-# }
 
 
 # # 'my-db1-instance.cpwy0kssc35o.ap-south-1.rds.amazonaws.com'
@@ -147,7 +145,8 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS =[
     os.path.join(BASE_DIR,'static')
 ]
-STATIC_ROOT =os.path.join(BASE_DIR,'assets/')
+
+STATIC_ROOT = BASE_DIR / "staticfiles_build" / "staticfiles"
 
 # STATIC_ROOT = BASE_DIR / "staticfiles"
 

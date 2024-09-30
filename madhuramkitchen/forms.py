@@ -39,3 +39,5 @@ class MenuItemForm(forms.ModelForm):
         if dish_type not in ['veg', 'non_veg', 'green_leafy']:
             raise forms.ValidationError("Invalid dish type.")
         return dish_type
+    
+    
