@@ -1,7 +1,7 @@
 from django.urls import path, include
 from .views import index,add_category, add_menu_item, menu_items, order_successful, log,signup,logout,supervisor, \
 supervisorlogout, orders_table,users_table,back,dashboard,add_phone_number,create_blog,edit_blog,blog_list,delete_blog, \
-blog_items, events, edit_items,edit_menuitem,delete_menuitem,category_list,delete_category,edit_category,view_bag,add_to_bag
+blog_items, events, edit_items,edit_menuitem,delete_menuitem,category_list,delete_category,edit_category,view_bag,add_to_bag,about,contact
 
 
 urlpatterns = [
@@ -34,4 +34,6 @@ urlpatterns = [
     path('categories/edit/<int:pk>/', edit_category, name='edit_category'),
     path('view_bag', view_bag, name='view_bag'),
     path('add_to_bag', add_to_bag, name='add_to_bag'),
+    path('about',about,name='about'),
+    path('contact',contact,name='contact')
 ]
