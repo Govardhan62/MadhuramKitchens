@@ -47,7 +47,7 @@
 
     <link rel="stylesheet" href="{% static 'css/flaticon.css' %}" />
     <link rel="stylesheet" href="{% static 'css/icomoon.css' %}" />
-    <link rel="stylesheet" href="{% static css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   </head>
   <body>
     <nav
@@ -55,7 +55,7 @@
       id="ftco-navbar"
     >
       <div class="container">
-        <a class="navbar-brand" href="index.html"
+        <a class="navbar-brand" href="{% url 'index' %}"
           ><img
             src="static/images/madhuram-kitchens-logo.png"
             alt="logo"
@@ -77,23 +77,23 @@
         <div class="collapse navbar-collapse" id="ftco-nav">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a href="index.html" class="nav-link">Home</a>
+              <a href="{% url 'index' %}" class="nav-link">Home</a>
             </li>
             <li class="nav-item active">
-              <a href="about.html" class="nav-link">About</a>
+              <a href="{% url 'about' %}" class="nav-link">About</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a href="menu.html" class="nav-link">Menu</a>
+            </li> -->
+            <li class="nav-item">
+              <a href="{% url 'blog_items' %}" class="nav-link">Blog</a>
             </li>
             <li class="nav-item">
-              <a href="blog.html" class="nav-link">Blog</a>
+              <a href="{% url 'contact' %}" class="nav-link">Contact</a>
             </li>
-            <li class="nav-item">
-              <a href="contact.html" class="nav-link">Contact</a>
-            </li>
-            <li class="nav-item cta">
+            <!-- <li class="nav-item cta">
               <a href="reservation.html" class="nav-link">Book a table</a>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
@@ -116,7 +116,7 @@
             <h1 class="mb-2 bread">About</h1>
             <p class="breadcrumbs">
               <span class="mr-2"
-                ><a href="index.html"
+                ><a href="{% url 'index' %}"
                   >Home <i class="ion-ios-arrow-forward"></i></a
               ></span>
               <span>About <i class="ion-ios-arrow-forward"></i></span>
@@ -634,7 +634,13 @@
         <div class="row mb-5">
           <div class="col-md-6 col-lg-3">
             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">MADHURAM</h2>
+              <div style="text-align: center; padding-bottom: 30px">
+                <img
+                  src="static/images/madhuram-kitchens-logo.png"
+                  height="100"
+                  width=""
+                />
+              </div>
               <p>
                 Welcome to Madhuram's Kitchen, where flavors come alive! Nestled
                 far away, behind the word mountains, we bring you the essence of
@@ -700,6 +706,7 @@
                     placeholder="Enter email address"
                   />
                   <input
+                    style="background-color: #f57e20 !important"
                     type="submit"
                     value="Subscribe"
                     class="form-control submit px-3"
@@ -799,7 +806,7 @@
     </div>
 
     <script src="{% static 'js/jquery.min.js' %}"></script>
-    <script src="{% static 'js/jquery-migrate-3.0.1.min.js %}"></script>
+    <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>

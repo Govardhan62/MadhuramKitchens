@@ -16,7 +16,30 @@
   <!-- Bootstrap core CSS -->
   <link href="{% static 'styles.css' %}" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<!-- meta tags for design by ram -->
+<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Monoton&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Miss+Fajardose&display=swap" rel="stylesheet">
 
+<link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/animate.css' %}">
+
+<link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+<link rel="stylesheet" href="{ % static 'css/magnific-popup.css' %}">
+
+<link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+<link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+
+<link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+<link rel="stylesheet" href="{ % static 'css/jquery.timepicker.css' %}">
+
+
+<link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+<link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<!-- meta tags end by ram  -->
 
   <style>
     .bd-placeholder-img {
@@ -538,10 +561,8 @@
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
           <li><a href="#" class="nav-link px-4 link-secondary">Home</a></li>
           <li><a href="{% url 'about' %}" class="nav-link px-4 link-dark">About</a></li>
-          <!-- <li><a href="#" class="nav-link px-4 link-dark">Cuisines</a></li> -->
-          <li><a href="{% url 'blog_items' %}" class="nav-link px-4 link-dark">Food Blog</a></li>
-          <li><a href="#" class="nav-link px-4 link-dark">Contact</a></li>
-          <!-- <li><a href="#" class="nav-link px-4 link-dark">Blog</a></li> -->
+          <li><a href="{% url 'blog_items' %}" class="nav-link px-4 link-dark">Blog</a></li>
+          <li><a href="{% url 'contact' %}" class="nav-link px-4 link-dark">Contact</a></li>
           <li><a href="{% url 'events' %}" class="nav-link px-4 link-dark">Events</a></li>
           <!-- {% if not user.is_authenticated %}
           <li><a href="{% url 'supervisor' %}" class="nav-link px-4 link-dark">Admin Login</a></li>
@@ -637,14 +658,243 @@
   <!-- </div> -->
   <!-- <div class="cuisines-section" style="background-image: url('static/images/white_wood_bg.jpg'); background-size: cover; padding: 20px;"> -->
 
+
+    <!-- cuisine section by ram -->
+<section class="ftco-section">
+  <div class="container">
+    <div class="row justify-content-center mb-5 pb-2">
+      <div class="col-md-7 text-center heading-section ftco-animate">
+        <span class="subheading">Cuisine</span>
+        <h2 class="mb-4">Our Menu</h2>
+      </div>
+    </div>	
+    <div class="row">
+      {% for category in categories %}
+      <div class="col-md-6 col-lg-3 ftco-animate">
+        <div class="staff">
+          <div class="img" style="background-image: url({{category.image.url}});"></div>
+          <div class="text pt-4">
+            <h3 style="text-align: center;">{{category.name}}</h3>           
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<!-- cuisine section end by ram -->
+
+<!-- menu section by ram -->
+<section class="ftco-section">
+  <div class="container-fluid px-4">
+    <div class="row justify-content-center mb-5 pb-2">
+      <div class="col-md-7 text-center heading-section ftco-animate">
+        <span class="subheading">Specialties</span>
+        <h2 class="mb-4">Our Menu</h2>
+      </div>
+    </div>
+    <div class="row">
+      {% csrf_token %}
+  
+          {% for category in categories %}
+      <div class="col-md-6 col-lg-4 menu-wrap">
+        <div class="heading-menu text-center ftco-animate">
+          <h3>{{ category.name }}</h3>
+        </div>
+        {% for dish in menu_items %}
+              {% if dish.category.id == category.id %}
+        <div class="menus d-flex ftco-animate">
+          <div
+            class="menu-img img"
+            style="background-image: url({{dish.image.url}})" 
+          ></div>
+          <div class="text">
+            <div class="d-flex">
+              <div class="one-half">
+                <h3>{{ dish.dish_name }}</h3>
+              </div>
+              <div class="one-forth" style="cursor:pointer ;">
+                <span class="price"  onclick="toggleSelect(this, '{{ dish.id }}')">  {% if dish.id|stringformat:"s" in request.session.bag %}
+                  unselect ✖
+                  {% else %}
+                  select ✔
+                  {% endif %}</span>
+              </div>
+            </div>
+            <p>
+              <span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>,
+              <span>Tomatoe</span>
+            </p>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+    
+    <!-- menu section end by ram -->
+
+<!-- footer by ram -->
+<footer class="ftco-footer ftco-bg-dark ftco-section">
+  <div class="container-fluid px-md-5 px-3">
+    <div class="row mb-5">
+      <div class="col-md-6 col-lg-3">
+        <div class="ftco-footer-widget mb-4">
+          <!-- <h2 class="ftco-heading-2">MADHURAM</h2> -->
+          <div style="text-align:center;padding-bottom: 30px;">
+          <img src="static/images/madhuram-kitchens-logo.png" height="100" width=""/>
+          </div>
+          <p>
+            Welcome to Madhuram's Kitchen, where flavors come alive! Nestled
+            far away, behind the word mountains, we bring you the essence of
+            culinary delights. Join us for an unforgettable dining
+            experience!
+          </p>
+          <ul
+            class="ftco-footer-social list-unstyled float-md-left float-lft mt-3"
+          >
+            <li class="ftco-animate">
+              <a href="#"><span class="icon-twitter"></span></a>
+            </li>
+            <li class="ftco-animate">
+              <a href="#"><span class="icon-facebook"></span></a>
+            </li>
+            <li class="ftco-animate">
+              <a href="#"><span class="icon-instagram"></span></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2">Open Hours</h2>
+          <ul class="list-unstyled open-hours">
+            <li class="d-flex">
+              <span>Monday</span><span>9:00 - 24:00</span>
+            </li>
+            <li class="d-flex">
+              <span>Tuesday</span><span>9:00 - 24:00</span>
+            </li>
+            <li class="d-flex">
+              <span>Wednesday</span><span>9:00 - 24:00</span>
+            </li>
+            <li class="d-flex">
+              <span>Thursday</span><span>9:00 - 24:00</span>
+            </li>
+            <li class="d-flex">
+              <span>Friday</span><span>9:00 - 02:00</span>
+            </li>
+            <li class="d-flex">
+              <span>Saturday</span><span>9:00 - 02:00</span>
+            </li>
+            <li class="d-flex">
+              <span>Sunday</span><span> 9:00 - 02:00</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2">Newsletter</h2>
+          <p>
+            Far away, behind the word mountains, far from the countries,
+            lies a kitchen filled with flavors and delight. Subscribe for
+            updates from Madhuram's Kitchen!
+          </p>
+          <form action="#" class="subscribe-form">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control mb-2 text-center"
+                placeholder="Enter email address"
+              />
+              <input
+              style="background-color: #f57e20!important;"
+                type="submit"
+                value="Subscribe"
+                class="form-control submit px-3"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2">Instagram</h2>
+          <div class="thumb d-sm-flex">
+            <a
+              href="#"
+              class="thumb-menu img"
+              style="background-image: url(static/images/insta-1.jpg)"
+            >
+            </a>
+            <a
+              href="#"
+              class="thumb-menu img"
+              style="background-image: url(static/images/insta-2.jpg)"
+            >
+            </a>
+            <a
+              href="#"
+              class="thumb-menu img"
+              style="background-image: url(static/images/insta-3.jpg)"
+            >
+            </a>
+          </div>
+          <div class="thumb d-flex">
+            <a
+              href="#"
+              class="thumb-menu img"
+              style="background-image: url(static/images/insta-4.jpg)"
+            >
+            </a>
+            <a
+              href="#"
+              class="thumb-menu img"
+              style="background-image: url(static/images/insta-5.jpg)"
+            >
+            </a>
+            <a
+              href="#"
+              class="thumb-menu img"
+              style="background-image: url(static/images/insta-6.jpg)"
+            >
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <p>
+          <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+          Copyright &copy;
+          <script>
+            document.write(new Date().getFullYear());
+          </script>
+          All rights reserved
+          <!-- All rights reserved | This template is made with
+          <i class="icon-heart" aria-hidden="true"></i> by
+          <a href="https://colorlib.com" target="_blank">Colorlib</a> -->
+          <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- footer end by ram -->
+
+
+
     <div class="container mt-4">
     <div>
       <div>
-        <!-- Left Column Content -->
         <h2 style="font-weight: bold;">Cuisines</h2>
       </div>
       <div>
-        <!-- Swiper -->
         <div class="swiper-container">
           <div class="swiper-wrapper">
             {% for category in categories %}
@@ -679,6 +929,7 @@
       </div>
     </div>
 
+    
 
     <div class="menu-container">
       <h1 class="menu-heading">Menu</h1>
@@ -700,9 +951,9 @@
                       <button type="button" class="select-btn {% if dish.id|stringformat:"s" in request.session.bag %}selected{% else %}unselected{% endif %}" 
                           onclick="toggleSelect(this, '{{ dish.id }}')">
                           {% if dish.id|stringformat:"s" in request.session.bag %}
-                          Unselect ✖
+                          ✖
                           {% else %}
-                          Select ✔
+                           ✔
                           {% endif %}
                       </button>
                   </div>
@@ -1129,19 +1380,40 @@
     </script>
 
     <!-- Footer -->
-    <footer class="custom-footer">
+    <!-- <footer class="custom-footer">
       <div class="footer-content">
         <p>Copyright © 2024 MADHURAM KITCHENS - All Rights Reserved.</p>
         <div class="footer-links">
           <a href="#">Privacy Policy</a>
           <a href="#">Terms and Conditions</a>
         </div>
-        <!-- <hr>
-              <p>Powered by GoDaddy</p> -->
       </div>
-    </footer>
+    </footer> -->
 
 
+<!-- scripts by ram -->
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'js/aos.js' %}"></script>
+  <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'js/jquery.timepicker.min.js' %}"></script>
+  <script src="{% static 'js/scrollax.min.js' %}"></script>
+  <script src="{% static 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="{% static 'js/google-map.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+<!-- scripts end by ram -->
 </body>
 
 </html>

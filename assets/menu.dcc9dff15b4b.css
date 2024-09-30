@@ -1,0 +1,58 @@
+.menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-item {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.menu-item-name {
+    display: block;
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+}
+
+.menu-item-line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu-item-description {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.menu-item-dots {
+    flex-grow: 1;
+    border-bottom: 1px dotted #ccc;
+    margin: 0 10px;
+}
+
+.menu-item-price {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.quantity-controller {
+    display: inline-block;
+}
+
+.add-button, .quantity-button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.quantity-display {
+    display: inline-block;
+    padding: 5px;
+}
