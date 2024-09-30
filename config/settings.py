@@ -79,26 +79,30 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
-# Database
+# Database 
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#      'default': {
+#          'ENGINE': 'django.db.backends.postgresql',
+#          'NAME': os.getenv('DATABASE_NAME', 'madhuram'),
+#          'USER': os.getenv('DATABASE_USER', 'postgres'),
+#          'PASSWORD': os.getenv('DATABASE_PASSWORD', 'Ninesoft1234'),
+#          'HOST': os.getenv('DATABASE_HOST', 'my-db1-instance.cpwy0kssc35o.ap-south-1.rds.amazonaws.com'),
+#          'PORT': os.getenv('DATABASE_PORT', '5432'),
+#      }
+# }
+
 DATABASES = {
-     'default': {
-         'ENGINE': 'django.db.backends.postgresql',
-         'NAME': os.getenv('DATABASE_NAME', 'madhuram'),
-         'USER': os.getenv('DATABASE_USER', 'postgres'),
-         'PASSWORD': os.getenv('DATABASE_PASSWORD', 'Ninesoft1234'),
-         'HOST': os.getenv('DATABASE_HOST', 'my-db1-instance.cpwy0kssc35o.ap-south-1.rds.amazonaws.com'),
-         'PORT': os.getenv('DATABASE_PORT', '5432'),
-     }
+    'default': dj_database_url.config(
+        default=os.environ.get(
+            'DATABASE_URL',  # This checks for DATABASE_URL in environment variables
+            'postgresql://pretty_django_rq0z_user:rCAfWSNfchPGTOfE0yYE5joBCrcRtsOi@dpg-crqnv8bv2p9s73e79v2g-a.oregon-postgres.render.com/madhuramkitchen'  # Local fallback (you can adjust with your local credentials)
+        ),
+        conn_max_age=600
+    )
 }
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#        "NAME": "mydatabase",
-#     }
-# }
 
 
 # # 'my-db1-instance.cpwy0kssc35o.ap-south-1.rds.amazonaws.com'
@@ -140,7 +144,8 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS =[
     os.path.join(BASE_DIR,'static')
 ]
-STATIC_ROOT =os.path.join(BASE_DIR,'assets/')
+
+STATIC_ROOT = BASE_DIR / "staticfiles_build" / "staticfiles"
 
 # STATIC_ROOT = BASE_DIR / "staticfiles"
 
