@@ -868,82 +868,9 @@
 
 
 
-    <div class="container mt-4">
-    <div>
-      <div>
-        <h2 style="font-weight: bold;">Cuisines</h2>
-      </div>
-      <div>
-        <div class="swiper-container">
-          <div class="swiper-wrapper">
-            {% for category in categories %}
-            <div class="swiper-slide">
-              <div class="slide-content">
-                <img src="{{category.image.url}}" alt="Indian Cuisine" style="width: 400px; height: 500px;" />
-                <span class="cuisine-name">{{category.name}}</span>
-              </div>
-            </div>
-            <!-- <div class="swiper-slide">
-                <div class="slide-content">
-                  <img src="static\images\Indian_Cuisine-1.webp" alt="telugu Cuisine" />
-                  <span class="cuisine-name">Telugu</span>
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="slide-content">
-                  <img src="static\images\Chinese-1.webp" alt="chinese Cuisine" />
-                  <span class="cuisine-name">Chinese</span>
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="slide-content">
-                  <img src="static\images\Mughlai_Cuisine.webp" alt="Mughlai Cuisine" />
-                  <!- <img src="c:\Users\sowja\Downloads\Blog_20231130-486750586-1701366049.png" alt="muglai Cuisine" /> -->
-            <!-- <span class="cuisine-name">Mughlai</span>
-                </div>
-              </div> -->
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-    </div>
+   
 
-    
 
-    <div class="menu-container">
-      <h1 class="menu-heading">Menu</h1>
-  
-      <form id="menu-form" method="POST">
-          {% csrf_token %}
-  
-          {% for category in categories %}
-          <h2 style="color: orange;">{{ category.name }}</h2>
-          <div class="menu-cards">
-              {% for dish in menu_items %}
-              {% if dish.category.id == category.id %}
-              <!-- Each dish in a card -->
-              <div class="menu-card">
-                  <div class="menu-item-flex">
-                      <h3 class="menu-item-name">{{ dish.dish_name }}</h3>
-  
-                      <!-- Select/Unselect button -->
-                      <button type="button" class="select-btn {% if dish.id|stringformat:"s" in request.session.bag %}selected{% else %}unselected{% endif %}" 
-                          onclick="toggleSelect(this, '{{ dish.id }}')">
-                          {% if dish.id|stringformat:"s" in request.session.bag %}
-                          ✖
-                          {% else %}
-                           ✔
-                          {% endif %}
-                      </button>
-                  </div>
-              </div>
-              {% endif %}
-              {% endfor %}
-          </div>
-          {% endfor %}
-      </form>
-  </div>
-  
 
     <!-- <script>
       function toggleSelect(button, dishId) {
