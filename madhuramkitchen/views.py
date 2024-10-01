@@ -620,11 +620,11 @@ def about(request):
 def contact(request):
     return render(request,'contact.html')
 
-def flatter(request):
+def services(request):
     categories = Category.objects.all()
     menu_items = MenuItem.objects.all()
     context = {
         'categories': categories,
         'menu_items': menu_items,
     }
-    return render(request,'flatter.html',context)
+    return render(request,'services.html',context)

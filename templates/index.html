@@ -563,6 +563,7 @@
           <li><a href="{% url 'about' %}" class="nav-link px-4 link-dark">About</a></li>
           <li><a href="{% url 'blog_items' %}" class="nav-link px-4 link-dark">Blog</a></li>
           <li><a href="{% url 'contact' %}" class="nav-link px-4 link-dark">Contact</a></li>
+          <li><a href="{% url 'services' %}" class="nav-link px-4 link-dark">Services</a></li>
           {% if not user.is_authenticated %}
           <a href="{% url 'log' %}">
             <button type="button" class="btn btn-outline-primary me-2">Login</button>
