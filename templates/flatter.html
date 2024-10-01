@@ -1,0 +1,733 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>flatter</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="static/images/madhuram-kitchens-logo.png" height="100" width="200">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/slicknav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+     <style>
+        .banner-3 {
+            background-image: url('static/images/banner/banner-3.png');
+          }
+          .slider_img_1 {
+            background-image: url('static/images/banner/banner.png');
+
+          }
+          .video_bg {
+            background-image: url('static/images/banner/banner-2.png');
+          }
+          .zigzag_bg_1::before {
+            background-image: url('static/images/zigzag.svg');
+          }
+          .footer_area::before {
+            background-image: url('static/images/zigzag.svg');
+          }
+
+          .zigzag_bg_2::after {
+            background-image: url('static/images/zigzag.svg');
+          }
+          .footer-bg {
+            background-image: url('static/images/banner/footer-bg.png');
+          }
+          .breadcam_bg_1 {
+            background-image: url('static/images/banner/common.png');
+          }
+          .gallery_bg_1 {
+            background-image: url('static/images/gallery/01.png');
+          }
+          
+          /* line 36, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_gallery.scss */
+          .gallery_bg_2 {
+            background-image: url('static/images/gallery/2.png');
+          }
+          
+          /* line 39, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_gallery.scss */
+          .gallery_bg_3 {
+            background-image: url('static/images/gallery/3.png');
+          }
+          
+          /* line 42, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_gallery.scss */
+          .gallery_bg_4 {
+            background-image: url('static/images/gallery/4.png');
+          }
+          
+          /* line 45, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_gallery.scss */
+          .gallery_bg_5 {
+            background-image: url('static/images/gallery/5.png');
+          }
+          
+          /* line 48, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_gallery.scss */
+          .gallery_bg_6 {
+            background-image: url('static/images/gallery/6.png');
+          }
+          
+          /* line 51, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_gallery.scss */
+          .gallery_bg_7 {
+            background-image: url('static/images/gallery/7.png');
+          }
+          .primary-checkbox input:checked + label {
+            background: url('static/images/elements/primary-check.png') no-repeat center center/cover;
+            border: none;
+          }
+
+          .confirm-checkbox input:checked + label {
+            background: url('static/images/elements/success-check.png') no-repeat center center/cover;
+            border: none;
+          }
+          .disabled-checkbox input:checked + label {
+            background: url('static/images/elements/disabled-check.png') no-repeat center center/cover;
+            border: none;
+          }
+          .primary-radio input:checked + label {
+            background: url('static/images/elements/primary-radio.png') no-repeat center center/cover;
+            border: none;
+          }
+          .confirm-radio input:checked + label {
+            background: url('static/images/elements/success-radio.png') no-repeat center center/cover;
+            border: none;
+          }
+          .disabled-radio input:checked + label {
+            background: url('static/images/elements/disabled-radio.png') no-repeat center center/cover;
+            border: none;
+          }
+          
+          
+     </style>
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+    <!-- header-start -->
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-10 col-lg-10">
+                            <div class="main-menu d-none d-lg-block">
+                                <nav>
+                                    <ul class="mein_menu_list" id="navigation">
+                                        <li><a href="{% url 'about' %}">About</a></li>
+                                        <li><a href="service.html">Services</a></li>
+                                        <!-- <li><a href="menu.html">menu</a></li> -->
+                                        <li><a href="#">gallery</a></li>
+                                        <div class="logo-img d-none d-lg-block">
+                                                <a href="{% url 'index' %}">
+                                                    <img src="static/images/madhuram-kitchens-logo.png" alt="">
+                                                </a>
+                                            </div>
+                                        <li><a href="{% url 'blog_items' %}">blog <i class="ti-angle-down"></i></a>
+                                            <!-- <ul class="submenu">
+                                                <li><a href="{% url 'blog_items' %}">blog</a></li>
+                                                <li><a href="single-blog.html">single-blog</a></li>
+                                            </ul> -->
+                                        </li>
+                                        <!-- <li><a href="#">pages <i class="ti-angle-down"></i></a>
+                                            <ul class="submenu">
+                                                <li><a href="elements.html">elements</a></li>
+                                            </ul>
+                                        </li> -->
+                                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-2 d-none d-lg-block">
+                            <div class="custom_order">
+                                <a href="{% url 'log' %}" class="boxed_btn_white">Login</a>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                        <div class="logo-img-small d-sm-block d-md-block d-lg-none">
+                                <a href="{% url 'index' %}">
+                                    <img src="static/images/madhuram-kitchens-logo.png" alt="" height="50" width="90">
+                                </a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header-end -->
+
+    <!-- slider_area-start -->
+    <div class="slider_area zigzag_bg_2">
+        <div class="slider_sctive owl-carousel">
+            <div class="single_slider slider_img_1">
+                <div class="single_slider-iner">
+                    <div class="slider_contant text-center">
+                        <h3>Food Catering <br>
+                            Service.</h3>
+                            <p>inappropriate behavior is often laughed off as “boys will be boys,” women <br>
+                            face higher conduct standards especially in the workplace. That’s why it’s <br>
+                                crucial that, as women.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="single_slider slider_img_1">
+                <div class="single_slider-iner">
+                    <div class="slider_contant text-center">
+                        <h3>Food Catering <br>
+                            Service.</h3>
+                            <p>inappropriate behavior is often laughed off as “boys will be boys,” women <br>
+                            face higher conduct standards especially in the workplace. That’s why it’s <br>
+                                crucial that, as women.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="single_slider slider_img_1">
+                <div class="single_slider-iner">
+                    <div class="slider_contant text-center">
+                        <h3>Food Catering <br>
+                            Service.</h3>
+                            <p>inappropriate behavior is often laughed off as “boys will be boys,” women <br>
+                            face higher conduct standards especially in the workplace. That’s why it’s <br>
+                                crucial that, as women.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- slider_area-end -->
+
+    <!-- service_area-start -->
+    <div class="service_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="section_title mb-60">
+                        <h3>Our Services</h3>
+                        <p>inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards <br> especially in the workplace. That’s why it’s crucial that, as women.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-4 col-md-6">
+                    <div class="single_service">
+                        <div class="service_icon">
+                            <i class="flaticon-gift"></i>
+                        </div>
+                        <h4>Birthday Catering</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    <div class="single_service">
+                        <div class="service_icon">
+                            <i class="flaticon-cake"></i>
+                        </div>
+                        <h4>Wedding Service</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    <div class="single_service">
+                        <div class="service_icon">
+                            <i class="flaticon-dance"></i>
+                        </div>
+                        <h4>Party Catering</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    <div class="single_service">
+                        <div class="service_icon">
+                            <i class="flaticon-calendar"></i>
+                        </div>
+                        <h4>Event Catering</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    <div class="single_service">
+                        <div class="service_icon">
+                            <i class="flaticon-businessman"></i>
+                        </div>
+                        <h4>Corporate Service</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    <div class="single_service">
+                        <div class="service_icon">
+                            <i class="flaticon-running-man"></i>
+                        </div>
+                        <h4>Catering On Demand</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- service_area-end -->
+
+    <!-- video_area_start -->
+    <div class="video_area video_bg zigzag_bg_1 zigzag_bg_2 ">
+        <div class="video_area_inner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="video_text">
+                            <div class="info">
+                                <div class="info_inner">
+                                        <h4>Watch Video</h4>
+                                        <p>You will love our execution</p>
+                                </div>
+                                <div class="icon_video">
+                                        <a class="popup-video" href="https://www.youtube.com/watch?v=HWnXId_Zg4k"><i class="ti-control-play"></i></a>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- video_area_end -->
+
+    <!-- order_area_start -->
+    <div class="order_area">
+        <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="section_title mb-70">
+                            <h3>Popular Orders</h3>
+                            <p>inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards <br> especially in the workplace. That’s why it’s crucial that, as women.</p>
+                        </div>
+                    </div>
+                </div>
+            <div class="row">
+                <div class="col-xl-4 col-md-6">
+                    <div class="single_order">
+                        <div class="order_thumb">
+                            <img src="static/images/order/order-1.png" alt="">
+                            <div class="order_prise">
+                                <span>10.00</span>
+                            </div>
+                        </div>
+                        <div class="order_info">
+                            <h3><a href="#">Weastern Set Meal 01</a></h3>
+                            <p>Chicken Fried Rice   |   Crispy Chicken fry <br>
+                                    Weastern Pickle   |   Mixed Vegetable <br>
+                                    Soft Drinks
+                            </p>
+                            <a href="#" class="boxed_btn">Order Now!</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    <div class="single_order">
+                        <div class="order_thumb">
+                            <img src="static/images/order/order-2.png" alt="">
+                            <div class="order_prise">
+                                <span>10.00</span>
+                            </div>
+                        </div>
+                        <div class="order_info">
+                            <h3><a href="#">Weastern Set Meal 02</a></h3>
+                            <p>Chicken Fried Rice   |   Crispy Chicken fry <br>
+                                    Weastern Pickle   |   Mixed Vegetable <br>
+                                    Soft Drinks
+                            </p>
+                            <a href="#" class="boxed_btn">Order Now!</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    <div class="single_order">
+                        <div class="order_thumb">
+                            <img src="static/images/order/order-3.png" alt="">
+                            <div class="order_prise">
+                                <span>10.00</span>
+                            </div>
+                        </div>
+                        <div class="order_info">
+                            <h3><a href="#">Weastern Set Meal 03</a></h3>
+                            <p>Chicken Fried Rice   |   Crispy Chicken fry <br>
+                                    Weastern Pickle   |   Mixed Vegetable <br>
+                                    Soft Drinks
+                            </p>
+                            <a href="#" class="boxed_btn">Order Now!</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    <div class="single_order">
+                        <div class="order_thumb">
+                            <img src="static/images/order/order-4.png" alt="">
+                            <div class="order_prise">
+                                <span>10.00</span>
+                            </div>
+                        </div>
+                        <div class="order_info">
+                            <h3><a href="#">Weastern Set Meal 01</a></h3>
+                            <p>Chicken Fried Rice   |   Crispy Chicken fry <br>
+                                    Weastern Pickle   |   Mixed Vegetable <br>
+                                    Soft Drinks
+                            </p>
+                            <a href="#" class="boxed_btn">Order Now!</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    <div class="single_order">
+                        <div class="order_thumb">
+                            <img src="static/images/order/order-5.png" alt="">
+                            <div class="order_prise">
+                                <span>10.00</span>
+                            </div>
+                        </div>
+                        <div class="order_info">
+                            <h3><a href="#">Weastern Set Meal 02</a></h3>
+                            <p>Chicken Fried Rice   |   Crispy Chicken fry <br>
+                                    Weastern Pickle   |   Mixed Vegetable <br>
+                                    Soft Drinks
+                            </p>
+                            <a href="#" class="boxed_btn">Order Now!</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    <div class="single_order">
+                        <div class="order_thumb">
+                            <img src="static/images/order/order-6.png" alt="">
+                            <div class="order_prise">
+                                <span>10.00</span>
+                            </div>
+                        </div>
+                        <div class="order_info">
+                            <h3><a href="#">Weastern Set Meal 03</a></h3>
+                            <p>Chicken Fried Rice   |   Crispy Chicken fry <br>
+                                    Weastern Pickle   |   Mixed Vegetable <br>
+                                    Soft Drinks
+                            </p>
+                            <a href="#" class="boxed_btn">Order Now!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- order_area_end -->
+
+    <!-- testmonial_area_start -->
+    <div class="testmonial_area banner-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="section_title white mb-60">
+                        <h3>Feedback from Customers</h3>
+                        <p>inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards <br> especially in the workplace. That’s why it’s crucial that, as women.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="testmonial_active owl-carousel">
+                        <div class="single_testmonial d-flex">
+                            <div class="testmonial_thumb">
+                                <img src="static/images/testmonial/1.png" alt="">
+                            </div>
+                            <div class="testmonial_author">
+                                <h3>Adame Nesane</h3>
+                                <span>Chief Customer</span>
+                                <p>You're had. Subdue grass Meat us winged years you'll doesn't. fruit two also won one
+                                    yielding creepeth third give may never lie alternet food.</p>
+                            </div>
+                        </div>
+                        <div class="single_testmonial d-flex">
+                            <div class="testmonial_thumb">
+                                <img src="static/images/testmonial/2.png" alt="">
+                            </div>
+                            <div class="testmonial_author">
+                                <h3>Adam Nahan</h3>
+                                <span>Chief Customer</span>
+                                <p>You're had. Subdue grass Meat us winged years you'll doesn't. fruit two also won one
+                                    yielding creepeth third give may never lie alternet food.</p>
+                            </div>
+                        </div>
+                        <div class="single_testmonial d-flex">
+                            <div class="testmonial_thumb">
+                                <img src="static/images/testmonial/1.png" alt="">
+                            </div>
+                            <div class="testmonial_author">
+                                <h3>Adame Nesane</h3>
+                                <span>Chief Customer</span>
+                                <p>You're had. Subdue grass Meat us winged years you'll doesn't. fruit two also won one
+                                    yielding creepeth third give may never lie alternet food.</p>
+                            </div>
+                        </div>
+                        <div class="single_testmonial d-flex">
+                            <div class="testmonial_thumb">
+                                <img src="static/images/testmonial/2.png" alt="">
+                            </div>
+                            <div class="testmonial_author">
+                                <h3>Adam Nahan</h3>
+                                <span>Chief Customer</span>
+                                <p>You're had. Subdue grass Meat us winged years you'll doesn't. fruit two also won one
+                                    yielding creepeth third give may never lie alternet food.</p>
+                            </div>
+                        </div>
+                        <div class="single_testmonial d-flex">
+                            <div class="testmonial_thumb">
+                                <img src="static/images/testmonial/1.png" alt="">
+                            </div>
+                            <div class="testmonial_author">
+                                <h3>Adame Nesane</h3>
+                                <span>Chief Customer</span>
+                                <p>You're had. Subdue grass Meat us winged years you'll doesn't. fruit two also won one
+                                    yielding creepeth third give may never lie alternet food.</p>
+                            </div>
+                        </div>
+                        <div class="single_testmonial d-flex">
+                            <div class="testmonial_thumb">
+                                <img src="static/images/testmonial/2.png" alt="">
+                            </div>
+                            <div class="testmonial_author">
+                                <h3>Adam Nahan</h3>
+                                <span>Chief Customer</span>
+                                <p>You're had. Subdue grass Meat us winged years you'll doesn't. fruit two also won one
+                                    yielding creepeth third give may never lie alternet food.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- testmonial_area_end -->
+
+    <!-- brand_area-start -->
+    <div class="brand_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="section_title mb-70">
+                        <h3>Brands love to take Our Services</h3>
+                        <p>inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct
+                            standards <br> especially in the workplace. That’s why it’s crucial that, as women.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                    <div class="col-xl-2 col-md-6 col-lg-3">
+                        <div class="single_brand">
+                            <img src="static/images/brand/1.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-6 col-lg-3">
+                        <div class="single_brand">
+                            <img src="static/images/brand/02.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-6 col-lg-3">
+                        <div class="single_brand">
+                            <img src="static/images/brand/03.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-6 col-lg-3">
+                        <div class="single_brand">
+                            <img src="static/images/brand/04.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-6 col-lg-3">
+                        <div class="single_brand">
+                            <img src="static/images/brand/05.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-6 col-lg-3">
+                        <div class="single_brand">
+                            <img src="static/images/brand/06.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-6 col-lg-3">
+                        <div class="single_brand">
+                            <img src="static/images/brand/7.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-6 col-lg-3">
+                        <div class="single_brand">
+                            <img src="static/images/brand/12.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-6 col-lg-3">
+                        <div class="single_brand">
+                            <img src="static/images/brand/9.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-6 col-lg-3">
+                        <div class="single_brand">
+                            <img src="static/images/brand/10.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-6 col-lg-3">
+                        <div class="single_brand">
+                            <img src="static/images/brand/11.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-6 col-lg-3">
+                        <div class="single_brand">
+                            <img src="static/images/brand/8.png" alt="">
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <!-- brand_area-end -->
+
+    <!-- footer-start -->
+    <footer class="footer_area footer-bg zigzag_bg_1">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-2 col-md-6 col-lg-2">
+                        <div class="footer_widget">
+                            <h3 class="heading">
+                                    Top Products
+                            </h3>
+                            <ul>
+                                <li><a href="#">Managed Website</a></li>
+                                <li><a href="#"> Manage Reputation</a></li>
+                                <li><a href="#">Power Tools</a></li>
+                                <li><a href="#">Marketing Service</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-6 col-lg-2">
+                        <div class="footer_widget">
+                            <h3 class="heading">
+                                    Quick Links
+                            </h3>
+                            <ul>
+                                <li><a href="#">Jobs</a></li>
+                                <li><a href="#">Brand Assets</a></li>
+                                <li><a href="#"> Investor Relations</a></li>
+                                <li><a href="#">Terms of Service</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-6 col-lg-2">
+                        <div class="footer_widget">
+                            <h3 class="heading">
+                                    Features
+                            </h3>
+                            <ul>
+                                <li><a href="#">Jobs</a></li>
+                                <li><a href="#">Brand Assets</a></li>
+                                <li><a href="#">Investor Relations</a></li>
+                                <li><a href="#">Terms of Service</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-6 col-lg-2">
+                        <div class="footer_widget">
+                            <h3 class="heading">
+                                    Resources
+                            </h3>
+                            <ul>
+                                <li><a href="#">Guides</a></li>
+                                <li><a href="#">Research</a></li>
+                                <li><a href="#">Experts</a></li>
+                                <li><a href="#">Agencies</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-12 col-lg-4">
+                        <div class="footer_widget">
+                            <h3 class="heading">
+                                    Newsletter
+                            </h3>
+                            <p class="offer_text" >You can trust us. we only send promo offers,</p>
+                            <form action="#">
+                                <input type="text" placeholder="Your email address">
+                                <button type="submit"> <i class="ti-arrow-right"></i> </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-xl-7 col-md-12 col-lg-8">
+                        <div class="copyright">
+                                <p class="footer-text"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                        </div>
+                    </div>
+                    <div class="col-xl-5 col-md-12 col-lg-4">
+                        <div class="social_links">
+                            <ul>
+                                <li><a href="#"> <i class="fa fa-facebook"></i> </a></li>
+                                <li><a href="#"> <i class="fa fa-twitter"></i> </a></li>
+                                <li><a href="#"> <i class="fa fa-dribbble"></i> </a></li>
+                                <li><a href="#"> <i class="fa fa-behance"></i> </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer-end -->
+
+
+    <!-- JS here -->
+    <script src="{% static 'js/vendor/modernizr-3.5.0.min.js' %}"></script>
+    <script src="{% static 'js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/ajax-form.js' %}"></script>
+    <script src="{% static 'js/waypoints.min.js' %}"></script>
+    <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/scrollIt.js' %}"></script>
+    <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <script src="{% static 'js/nice-select.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+
+    <!--contact js-->
+    <script src="{% static 'js/contact.js' %}"></script>
+    <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+    <script src="{% static 'js/jquery.form.js' %}"></script>
+    <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'js/mail-script.js' %}"></script>
+
+    <script src="{% static 'js/main1.js' %}"></script>
+
+</body>
+
+</html>

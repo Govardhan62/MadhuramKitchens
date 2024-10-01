@@ -26,14 +26,14 @@
 
 <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
 <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
-<link rel="stylesheet" href="{ % static 'css/magnific-popup.css' %}">
+<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
 
 <link rel="stylesheet" href="{% static 'css/aos.css' %}">
 
 <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
 
 <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
-<link rel="stylesheet" href="{ % static 'css/jquery.timepicker.css' %}">
+<link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
 
 
 <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
@@ -457,11 +457,11 @@
 
         // Toggle button text and classes
         if (action === 'selected') {
-          button.textContent = 'Unselect ✖';
+          button.textContent = '✖';
           button.classList.add('selected');
           button.classList.remove('unselected');
         } else {
-          button.textContent = 'Select ✔';
+          button.textContent = '✔';
           button.classList.remove('selected');
           button.classList.add('unselected');
         }
@@ -559,14 +559,10 @@
         </a>
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="#" class="nav-link px-4 link-secondary">Home</a></li>
+          <li><a href="{% url 'index' %}" class="nav-link px-4 link-secondary">Home</a></li>
           <li><a href="{% url 'about' %}" class="nav-link px-4 link-dark">About</a></li>
           <li><a href="{% url 'blog_items' %}" class="nav-link px-4 link-dark">Blog</a></li>
           <li><a href="{% url 'contact' %}" class="nav-link px-4 link-dark">Contact</a></li>
-          <li><a href="{% url 'events' %}" class="nav-link px-4 link-dark">Events</a></li>
-          <!-- {% if not user.is_authenticated %}
-          <li><a href="{% url 'supervisor' %}" class="nav-link px-4 link-dark">Admin Login</a></li>
-          {% endif %} -->
           {% if not user.is_authenticated %}
           <a href="{% url 'log' %}">
             <button type="button" class="btn btn-outline-primary me-2">Login</button>
@@ -580,9 +576,6 @@
           <a href="{% url 'logout' %}">
             <button type="button" class="btn btn-outline-primary me-2">Logout</button>
           </a>
-          <!-- <a href="{% url 'menu_items' %}">
-            <button type="button" class="btn btn-primary">View Menu</button>
-          </a> -->
           {% endif %}
         </div>
       </header>
@@ -694,16 +687,13 @@
               </div>
               <div class="one-forth" style="cursor:pointer ;">
                 <span class="price"  onclick="toggleSelect(this, '{{ dish.id }}')">  {% if dish.id|stringformat:"s" in request.session.bag %}
-                  unselect ✖
+                   ✖
                   {% else %}
-                  select ✔
+                   ✔
                   {% endif %}</span>
               </div>
             </div>
-            <p>
-              <span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>,
-              <span>Tomatoe</span>
-            </p>
+            <p>{{ dish.description|truncatewords_html:10 }}</p>
           </div>
         </div>
         {% endif %}
@@ -1316,7 +1306,7 @@
   <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
   <script src="{% static 'js/jquery.timepicker.min.js' %}"></script>
   <script src="{% static 'js/scrollax.min.js' %}"></script>
-  <script src="{% static 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="{% static 'js/google-map.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>
 <!-- scripts end by ram -->

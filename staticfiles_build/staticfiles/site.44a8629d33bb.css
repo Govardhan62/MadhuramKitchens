@@ -1,0 +1,59 @@
+/* Regular text styles */
+body {
+    color: black;
+    font-family: "Montserrat", Sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 25px;
+}
+
+/* Cuisines text styles */
+.cuisines-text {
+    color: var(--e-global-color-text);
+    font-family: "Montserrat", Sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+
+/* Swiper container styles */
+.swiper-container {
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+    cursor: grab;
+}
+
+/* Swiper slide styles */
+.swiper-slide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative; /* Important for overlay positioning */
+    text-align: center;
+    border-radius: 10px;
+    overflow: hidden; /* Ensure overlay is contained within the slide */
+}
+
+/* Image styles */
+.slide-content img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Overlay text styles */
+.cuisine-name {
+    position: absolute;
+    bottom: 15px; /* Position the text at the bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px;
+    color: white;
+    font-weight: 600;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
