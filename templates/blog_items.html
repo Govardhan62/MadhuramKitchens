@@ -103,6 +103,10 @@ html, body {
     <title>
       Madhuram Kitchens - Authentic Andhra Style Catering Services, Hyderabad
     </title>
+     <!-- <link rel="manifest" href="site.webmanifest"> -->
+     <link rel="shortcut icon" type="image/x-icon" href="static/images/madhuram-kitchens-logo.png" height="100" width="200">
+     <!-- Place favicon.ico in the root directory -->
+ 
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -219,32 +223,33 @@ html, body {
     <section class="ftco-section">
       <div class="container">
         <div class="row">
+          {% for blog in blogs %}
           <div class="col-md-4 ftco-animate">
             <div class="blog-entry">
               <a
                 href="#"
                 class="block-20"
-                style="background-image: url('static/images/image_1.jpg')"
+                style="background-image: url('{{ blog.image.url }}');"
               >
               </a>
               <div class="text pt-3 pb-4">
                 <div class="meta">
-                  <div><a href="#">June 25, 2019</a></div>
-                  <div><a href="#">Admin</a></div>
+                  <!-- <div><a href="#">June 25, 2019</a></div>
+                  <div><a href="#">Admin</a></div> -->
                 </div>
                 <h3 class="heading">
-                  <a href="#">Taste the delicious foods in Asia</a>
+                  <a href="#">{{blog.title}}</a>
                 </h3>
                 <p class="clearfix">
                   <a href="#" class="float-left read">Read more</a>
-                  <a href="#" class="float-right meta-chat"
+                  <!-- <a href="#" class="float-right meta-chat"
                     ><span class="icon-chat"></span> 3</a
-                  >
+                  > -->
                 </p>
               </div>
             </div>
           </div>
-          <div class="col-md-4 ftco-animate">
+          <!-- <div class="col-md-4 ftco-animate">
             <div class="blog-entry">
               <a
                 href="#"
@@ -368,7 +373,8 @@ html, body {
                 </p>
               </div>
             </div>
-          </div>
+          </div> -->
+          {% endfor %}
         </div>
         <!-- <div class="row no-gutters my-5">
           <div class="col text-center">

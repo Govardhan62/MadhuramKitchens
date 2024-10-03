@@ -109,7 +109,7 @@
                                             {% elif item.dish_type == 'green_leafy' %}
                                                 <img src="{% static 'images/veg-icon.png' %}" alt="Green Leafy" class="dish-type-icon">
                                             {% endif %}
-                                            {{ item.dish_name }} - ₹{{ item.price }}
+                                            {{ item.dish_name }}
                                             {% if item.recommended_dish %}
                                                 <span class ="recommended-text">Must-Try</span>
                                             {% endif %}

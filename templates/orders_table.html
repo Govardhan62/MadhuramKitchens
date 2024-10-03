@@ -44,7 +44,7 @@
                 <th>Customer Name</th>
                 <th>Email</th>
                 <th>Phone Number</th>
-                <th>Total Price</th>
+                <!-- <th>Total Price</th> -->
                 <th>Order Created At</th>
                 <th>View Details</th>
             </tr>
@@ -56,7 +56,7 @@
                 <td>{{ order.user.first_name }}</td>
                 <td>{{ order.user.email }}</td>
                 <td>{{ order.user.phone_number }}</td>
-                <td>{{ order.total_price }}</td>
+                <!-- <td>{{ order.total_price }}</td> -->
                 <td>{{ order.created_at }}</td>
                 <td class="view-details" onclick="toggleDetails('{{ order.id }}')">View Order Details</td>
             </tr>
@@ -67,7 +67,7 @@
                             <tr>
                                 <th>Items</th>
                                 <th>Quantity</th>
-                                <th>Price</th>
+                                <!-- <th>Price</th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -75,7 +75,7 @@
                             <tr>
                                 <td>{{ item.menu_item.dish_name }}</td>
                                 <td>{{ item.quantity }}</td>
-                                <td>{{ item.menu_item.price }}</td>
+                                <!-- <td>{{ item.menu_item.price }}</td> -->
                             </tr>
                             {% endfor %}
                         </tbody>
