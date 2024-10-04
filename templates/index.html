@@ -715,10 +715,31 @@
   <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
   <script src="{% static 'js/jquery.timepicker.min.js' %}"></script>
   <script src="{% static 'js/scrollax.min.js' %}"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="{% static 'js/google-map.js' %}"></script>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
+  <!-- <script src="{% static 'js/google-map.js' %}"></script> -->
   <script src="{% static 'js/main.js' %}"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  {% comment %} <script>
+    // Select the navbar toggler button and the collapsible navbar
+  const navbarToggler = document.querySelector('.navbar-toggler');
+  const navbarCollapse = document.querySelector('#ftco-nav');
+  
+  // Add event listener to the toggler button
+  navbarToggler.addEventListener('click', function() {
+      const isExpanded = this.getAttribute('aria-expanded') === 'true';
+  
+      // Toggle aria-expanded attribute
+      this.setAttribute('aria-expanded', !isExpanded);
+  
+      // Use Bootstrap's collapse functionality by toggling 'show' class manually
+      if (navbarCollapse.classList.contains('show')) {
+          navbarCollapse.classList.remove('show'); // Collapse
+      } else {
+          navbarCollapse.classList.add('show'); // Expand
+      }
+  });
+  
+  </script> {% endcomment %}
 {% endblock %}
