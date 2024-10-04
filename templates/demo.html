@@ -127,6 +127,18 @@
     align-items: center;
     margin-top: 10px;
   }
+  .navbar-nav {
+    padding: 10px;
+  }
+  
+  .navbar-toggler {
+    color: #fff;
+    border-color: #fff;
+  }
+
+  .navbar-toggler-icon {
+    color: #fff;
+  }
 }
 
     .welcome-message {
@@ -139,86 +151,60 @@
 
   </style>
   <body>
-    <nav
-      class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
-      id="ftco-navbar"
-    >
-      <div class="container">
-        <a class="navbar-brand" href="{% url 'index' %}">
-          <img
-            src="{% static 'images/madhuram-kitchens-logo.png' %}"
-            alt="logo"
-            width="140px"
-          />
-        </a>
-
-        <!-- Display welcome message beside the logo -->
-        {% if user.is_authenticated %}
-        <span class="welcome-message">Welcome, {{ user.username }}</span>
-        {% endif %}
-
-        
-        <!-- Menu Button -->
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#ftco-nav"
-          aria-controls="ftco-nav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-          style="z-index: 9999 !important;"
-        >
-          <span class="oi oi-menu"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="ftco-nav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a href="{% url 'index' %}" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item">
-              <a href="{% url 'about' %}" class="nav-link">About</a>
-            </li>
-            <li class="nav-item">
-              <a href="{% url 'blog_items' %}" class="nav-link">Blog</a>
-            </li>
-            <li class="nav-item">
-              <a href="{% url 'contact' %}" class="nav-link">Contact</a>
-            </li>
-
-            <!-- Show "Login" if user is not authenticated -->
-            {% if not user.is_authenticated %}
-            <li class="nav-item">
-              <a href="{% url 'log' %}" class="nav-link">Login</a>
-            </li>
-            {% endif %}
-            
-            <!-- Show "Logout" if user is authenticated -->
-            {% if user.is_authenticated %}
-            <li class="nav-item">
-              <a href="{% url 'logout' %}" class="nav-link">Logout</a>
-            </li>
-            {% endif %}
+   <!-- Navbar -->
+   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'index' %}">
+        <img src="{% static 'images/madhuram-kitchens-logo.png' %}" alt="logo" width="140px" />
+      </a>
+  
+      {% if user.is_authenticated %}
+      <span class="welcome-message">Welcome, {{ user.username }}</span>
+      {% endif %}
+  
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+        aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation" style="z-index: 9999 !important;">
+        <span class="oi oi-menu"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a href="{% url 'index' %}" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'about' %}" class="nav-link">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'blog_items' %}" class="nav-link">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'contact' %}" class="nav-link">Contact</a>
+          </li>
+  
+          {% if not user.is_authenticated %}
+          <li class="nav-item">
+            <a href="{% url 'log' %}" class="nav-link">Login</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+  
+      <div class="bag-icon-container">
+        <a href="{% url 'view_bag' %}" class="bag-icon-link">
+          <div class="bag-icon">
+            <img src="{% static 'images/bagicon1.png' %}" alt="Bag Icon" width="24px" />
+            <span class="bag-count">{{ request.session.total_items_count|default:0 }}</span>
           </div>
-        <!-- Bag Icon -->
-        
-        <div class="bag-icon-container">
-          <a href="{% url 'view_bag' %}" class="bag-icon-link">
-            <div class="bag-icon">
-              <img
-                src="{% static 'images/bagicon1.png' %}"
-                alt="Bag Icon"
-                width="24px"
-              />
-              <span class="bag-count"
-                >{{ request.session.total_items_count|default:0 }}</span
-              >
-            </div>
-          </a>
-        </div>
+        </a>
+      </div>
+    </div>
+  </nav>
 
-    </nav>
     <!-- END nav -->
 
     <section
